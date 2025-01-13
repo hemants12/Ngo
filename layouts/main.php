@@ -25,8 +25,6 @@ function includeFileWithVariables($filePath, $variables = array(), $print = true
 
 $isScssconverted = false;
 
-require_once ("scssphp/scss.inc.php");
-
 use ScssPhp\ScssPhp\Compiler;
 
 if($isScssconverted){

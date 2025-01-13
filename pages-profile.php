@@ -1,5 +1,13 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
+<?php 
+
+include('config.php');
+
+$res = mysqli_query($link,'SELECT * FROM users');
+$data = mysqli_fetch_assoc($res);
+
+?>
 
 <head>
 
@@ -41,12 +49,12 @@
                             <!--end col-->
                             <div class="col">
                                 <div class="p-2">
-                                    <h3 class="text-white mb-1">Anna Adame</h3>
-                                    <p class="text-white text-opacity-75">Owner & Founder</p>
+                                    <h3 class="text-white mb-1"><?php echo $data['username']; ?></h3>
+                                    <p class="text-white text-opacity-75"><?php echo $data['designation']; ?></p>
                                     <div class="hstack text-white-50 gap-1">
-                                        <div class="me-2"><i class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>California, United States</div>
+                                        <div class="me-2"><i class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i><?php echo $data['city']; ?></div>
                                         <div>
-                                            <i class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>Themesbrand
+                                            <i class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i><?php echo $data['country']; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -86,25 +94,25 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Full Name :</th>
-                                                                        <td class="text-muted">Anna Adame</td>
+                                                                        <td class="text-muted"><?php echo $data['username']; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Mobile :</th>
-                                                                        <td class="text-muted">+(1) 987 6543</td>
+                                                                        <td class="text-muted"><?php echo $data['number']; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">E-mail :</th>
-                                                                        <td class="text-muted">daveadame@velzon.com</td>
+                                                                        <td class="text-muted"><?php echo $data['useremail'] ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Location :</th>
-                                                                        <td class="text-muted">California, United States
+                                                                        <td class="text-muted"><?php echo $data['city']; ?>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <!-- <tr>
                                                                         <th class="ps-0" scope="row">Joining Date</th>
                                                                         <td class="text-muted">24 Nov 2021</td>
-                                                                    </tr>
+                                                                    </tr> -->
                                                                 </tbody>
                                                             </table>
                                                         </div>

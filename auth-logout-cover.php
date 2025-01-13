@@ -27,7 +27,8 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="index.php" class="d-block">
-                                                    <img src="assets/images/logo-light.png" alt="" height="18">
+                                                    <!-- <img src="assets/images/logo-light.png" alt="" height="18"> -->
+                                                    <h2 style="color:white;"> NGO KING </h2>
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -66,9 +67,9 @@
 
                                         <div class="mt-4 pt-2">
                                             <h5>You are Logged Out</h5>
-                                            <p class="text-muted">Thank you for using <span class="fw-semibold">velzon</span> admin template</p>
+                                            <p class="text-muted">Thank you for using <span class="fw-semibold">Ngo King Software</span> By Vakilkaro</p>
                                             <div class="mt-4">
-                                                <a href="auth-signin-basic.php" class="btn btn-success w-100">Sign In</a>
+                                                <a href="auth-signin-cover.php" class="btn btn-success w-100">Sign In</a>
                                             </div>
                                         </div>
                                     </div>
@@ -87,22 +88,6 @@
             <!-- end container -->
         </div>
         <!-- end auth page content -->
-
-        <!-- footer -->
-        <footer class="footer galaxy-border-none">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center">
-                            <p class="mb-0">&copy;
-                                <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- end Footer -->
     </div>
     <!-- end auth-page-wrapper -->
 
