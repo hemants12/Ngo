@@ -1,8 +1,89 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
 
+<?php
+// Include config file
+require_once "config.php";
+
+// Define variables and initialize with empty values
+$useremail = $password = "";
+$useremail_err = $password_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Validate useremail
+    if (empty(trim($_POST["useremail"]))) {
+        $useremail_err = "Please enter a useremail.";
+    } else {
+        $useremail = trim($_POST["useremail"]);
+    }
+
+    // Validate password
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter a password.";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    // Check input errors before checking credentials
+    if (empty($useremail_err) && empty($password_err)) {
+
+        // Prepare a select statement
+        $sql = "SELECT id, username, password FROM users WHERE useremail = ?";
+
+        if ($stmt = mysqli_prepare($link, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_useremail);
+
+            // Set parameters
+            $param_useremail = $useremail;
+
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                // Store result
+                mysqli_stmt_store_result($stmt);
+
+                // Check if user exists, verify password
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                    if (mysqli_stmt_fetch($stmt)) {
+                        if (password_verify($password, $hashed_password)) {
+                            // Password is correct, start a new session
+                            session_start();
+
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username;
+
+                            // Redirect to dashboard or home page
+                            header("location: index.php");
+                        } else {
+                            // Display an error message if password is incorrect
+                            $password_err = "The password you entered was not correct.";
+                        }
+                    }
+                } else {
+                    // Display an error message if user email does not exist
+                    $useremail_err = "No account found with that email.";
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
+?>
+
 <head>
-    <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'Sign In')); ?>
+    <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'Login')); ?>
     <?php include 'layouts/head-css.php'; ?>
 </head>
 
@@ -24,60 +105,35 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="index.php" class="d-block">
-                                                    <!-- <img src="assets/images/logo-light.png" alt="" height="18"> -->
                                                     <h2 style="color:white;"> NGO KING </h2>
                                                 </a>
-                                            </div>
-                                            <div class="mt-auto">
-                                                <div class="mb-3">
-                                                    <i class="ri-double-quotes-l display-4 text-success"></i>
-                                                </div>
-
-                                                <div id="qoutescarouselIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner text-center text-white-50 pb-5">
-                                                        <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end carousel -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
 
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h2 class="text-primary">Welcome Back !</h2>
+                                            <h2 class="text-primary">Welcome Back!</h2>
                                             <p class="text-muted">Sign in to continue with Ngo King Software.</p>
                                         </div>
 
                                         <div class="mt-4">
-                                            <form action="index.php">
+                                            <form novalidate action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method='POST'>
 
-                                                <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                <div class="mb-3 <?= !empty($useremail_err) ? 'has-error' : ''; ?>">
+                                                    <label for="useremail" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" name='useremail' id="useremail" value="<?=$useremail?>"  placeholder="Enter useremail">
+                                                    <span class="text-danger"><?=$useremail_err?></span>
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 <?= !empty($password_err) ? 'has-error' : ''; ?>">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input">
+                                                        <input type="password" class="form-control pe-5 password-input" name='password' placeholder="Enter password" value="<?=$password?>"  id="password-input">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <span class="text-danger"><?=$password_err?></span>
                                                     </div>
                                                 </div>
 
@@ -90,27 +146,17 @@
                                                     <button class="btn btn-success w-100" type="submit">Sign In</button>
                                                 </div>
 
-                                               
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
                             </div>
-                            <!-- end row -->
                         </div>
-                        <!-- end card -->
                     </div>
-                    <!-- end col -->
-
                 </div>
-                <!-- end row -->
             </div>
-            <!-- end container -->
         </div>
-        <!-- end auth page content -->
     </div>
-    <!-- end auth-page-wrapper -->
 
     <?php include 'layouts/vendor-scripts.php'; ?>
 

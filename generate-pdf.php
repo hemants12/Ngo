@@ -1,12 +1,12 @@
 <?php
 // Include database connection
 include('Config.php');
-require('fpdf/fpdf.php'); // Include the FPDF library
+require('fpdf186/fpdf.php'); 
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Query to fetch the data of the selected donation
+    
     $sql = "SELECT * FROM donations WHERE id = $id";
     $result = $link->query($sql);
 
@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
         $pdf->Cell(40, 10, 'Donation Receipt');
         $pdf->Ln(10);
 
-        // Add data to the PDF
+        
         $pdf->SetFont('Arial', '', 12);
         $pdf->Cell(0, 10, 'Name: ' . $row['fullName'], 0, 1);
         $pdf->Cell(0, 10, 'Mobile: ' . $row['phone'], 0, 1);
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
         $pdf->Cell(0, 10, 'Date: ' . $row['created_at'], 0, 1);
 
         // Output the PDF
-        $pdf->Output('D', 'Donation_Receipt_' . $id . '.pdf'); // Download the file
+        $pdf->Output('D', 'Donation_Receipt_' . $id . '.pdf'); 
     } else {
         echo "No record found.";
     }

@@ -31,7 +31,9 @@
                                     $sql = "SELECT fullName, idProof, SUM(donationAmount) AS totalDonation
                                             FROM donations
                                             GROUP BY idProof, fullName
-                                            ORDER BY totalDonation DESC";  // Order by total donation in descending order
+                                            ORDER BY totalDonation DESC  
+                                             LIMIT 5
+                                            ";  // Order by total donation in descending order
 
                                     $result = $link->query($sql);
 
