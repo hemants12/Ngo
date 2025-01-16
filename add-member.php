@@ -3,16 +3,25 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Process the form data here
-    $fullName = $_POST['fullName'];
+    $membership_type = $_POST['membership_type'];
+    $amount  = $_POST['amount'];
+    $method  = $_POST['method'];
+
+    $name = $_POST['name'];
     $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $phonenumber = $_POST['phonenumber'];
+    $start_date  = $_POST['start_date'];
+    $end_date   = $_POST['end_date'];
+    $address    = $_POST['address'];
+    $description  = $_POST['description'];
+
 
 
     // Assuming you have a connection to your database called $conn
     include 'config.php';
     // Insert data into the table
-    $query = "INSERT INTO donations (donorType, fullName, email, phone, country, areaStreet, state, city, pincode, idProof, donationAmount, donationType, donationFor)
-              VALUES ('$donorType', '$fullName', '$email', '$phone', '$country', '$areaStreet', '$state', '$city', '$pincode', '$idProof', '$donationAmount', '$donationType', '$donationFor')";
+    $query = "INSERT INTO memberships (membership_type, amount, method, name, email, phonenumber, start_date, end_date, address, description)
+              VALUES ('$membership_type', '$amount', '$method', '$name', '$email', '$phonenumber', '$start_date', '$end_date', '$address', '$description')";
 
 
     if (mysqli_query($link, $query)) {
@@ -84,8 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
-                                                <label for="fullName" class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                                                <label for="name" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="email" class="form-label">Email</label>
@@ -93,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="phone" class="form-label">Phone</label>
-                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                                                <input type="tel" class="form-control" id="phone" name="phonenumber" placeholder="Enter your phone number" required>
                                             </div>
                                            
                                             <div class="col-md-6 mb-3">
@@ -105,12 +114,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="mb-3">
                                         <div class="row">
                                         <div class="col-md-12">
-                                            <label for="membership_plan" class="form-label">Select Membership Plan</label>
-                                            <select class="form-select" id="membership_plan" name="membership_plan" required>
+                                            <label for="membership_type" class="form-label">Select Membership Plan</label>
+                                            <select class="form-select" id="membership_type" name="membership_type" required>
                                                 <option value="" disabled selected>Select a plan</option>
-                                                <option value="basic">Gold Plan</option>
-                                                <option value="standard">Silver Plan</option>
-                                                <option value="premium">Platinum Plan</option>
+                                                <option value="Silver">Silver Plan</option>
+                                                <option value="Gold">Gold Plan</option>
+                                                <option value="Platinum">Platinum Plan</option>
                                             </select>
                                         </div>
                                         </div>
@@ -119,12 +128,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="mb-3">
                                         <div class="row">
                                         <div class="col-md-6 mb-3">
-                                                <label for="startdate" class="form-label">Membership Start Date</label>
-                                                <input type="date" class="form-control" id="startdate" name="startdate" required>
+                                                <label for="start_date" class="form-label">Membership Start Date</label>
+                                                <input type="date" class="form-control" id="start_date" name="start_date" required>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label for="enddate" class="form-label">Membership End Date</label>
-                                                <input type="date" class="form-control" id="enddate" name="enddate" required>
+                                                <label for="end_date" class="form-label">Membership End Date</label>
+                                                <input type="date" class="form-control" id="end_date" name="end_date" required>
                                             </div>
                                         </div>
                                         
@@ -133,19 +142,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="row">
                                         <div class="col-md-12">
                                             <label for="reason" class="form-label">Why do you want to join the NGO?</label>
-                                            <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
+                                            <textarea class="form-control" id="reason" name="description" rows="4" required></textarea>
                                         </div>
-                                        </div>
+                                        </div>  
                                     </div>
                                     <div class="mb-3">
                                     <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="Donation-amount" class="form-label">Donation Amount</label>
-                                                <input type="number" class="form-control" id="Donation-amount" name="Donation-amount" placeholder="Enter Your Donation Amount" required>
+                                                <input type="number" class="form-control" id="Donation-amount" name="amount" placeholder="Enter Your Donation Amount" required>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="donationType" class="form-label">Donation Type</label>
-                                                <select class="form-select" id="donationType" name="donationType" required>
+                                                <select class="form-select" id="donationType" name="method" required>
                                                     <option value="" disabled selected>Select Donation Type</option>
                                                     <option value="Online">Online</option>
                                                     <option value="Cash">Cash</option>

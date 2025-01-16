@@ -62,10 +62,10 @@
     <div class="collapse menu-dropdown" id="sidebarMembers">
         <ul class="nav nav-sm flex-column">
         <li class="nav-item">
-                <a href="add-member.php.php" class="nav-link" data-key="t-member-list">Add Member</a>
+                <a href="add-member.php" class="nav-link" data-key="t-member-list">Add Member</a>
             </li>
             <li class="nav-item">
-                <a href="member-list.php" class="nav-link" data-key="t-member-list">Member List</a>
+                <a href="member_list.php" class="nav-link" data-key="t-member-list">Member List</a>
             </li>
             <li class="nav-item">
                 <a href="membership-plans.php" class="nav-link" data-key="t-membership-plans">Membership Plans</a>
