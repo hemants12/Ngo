@@ -8,8 +8,7 @@
                 <img src="assets/images/logo-sm.png" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <!-- <img src="assets/images/logo-light.png" alt="" height="17"> -->
-                <h2 style="color:white; margin-top:20px;"> NGO KING </h2>
+                <img src="assets/images/logo-light.png" alt="" height="17">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -17,54 +16,180 @@
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
-    <div class="dropdown sidebar-user m-1 rounded">
-        <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <span class="d-flex align-items-center gap-2">
-                <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-                <span class="text-start">
-                    <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
-                    <span class="d-block fs-14 sidebar-user-name-sub-text"><i
-                            class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span
-                            class="align-middle">Online</span></span>
-                </span>
-            </span>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end">
-            <!-- item-->
-            <h6 class="dropdown-header">Welcome Anna!</h6>
-            <a class="dropdown-item" href="pages-profile.php"><i
-                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                    class="align-middle">Profile</span></a>
-            <a class="dropdown-item" href="pages-faqs.php"><i
-                    class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
-                    class="align-middle">Help</span></a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="pages-profile-settings.php"><span
-                    class="badge bg-success-subtle text-success mt-1 float-end">New</span><i
-                    class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
-                    class="align-middle">Settings</span></a>
-            <a class="dropdown-item" href="auth-logout-basic.php"><i
-                    class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle"
-                    data-key="t-logout">Logout</span></a>
-        </div>
-    </div>
-
     <div id="scrollbar">
         <div class="container-fluid">
-
             <div id="two-column-menu">
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
-                    </a>
-                </li> <!-- end Dashboard Menu -->
-                <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li> -->
-          </ul>
+<!-- Dashboard -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="index.php" role="button">
+        <i class="fas fa-chart-line"></i>
+        <span data-key="t-dashboard">Dashboard</span>
+    </a>
+</li>
+<!-- Donations -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarDonations" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarDonations">
+        <i class="fas fa-donate"></i>
+
+
+        <span data-key="t-donations">Donations</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarDonations">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="New-Donation.php" class="nav-link" data-key="t-new-donation">New Donation</a>
+            </li>
+            <li class="nav-item">
+                <a href="donation-history.php" class="nav-link" data-key="t-donation-history">Donation History</a>
+            </li>
+            <li class="nav-item">
+                <a href="top-donors.php" class="nav-link" data-key="t-top-donors">Top Donors</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<!-- Members -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarMembers" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarMembers">
+        <i class="fas fa-user-plus"></i>
+        <span data-key="t-members">Members</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarMembers">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="member-list.php" class="nav-link" data-key="t-member-list">Member List</a>
+            </li>
+            <li class="nav-item">
+                <a href="membership-plans.php" class="nav-link" data-key="t-membership-plans">Membership Plans</a>
+            </li>
+            <li class="nav-item">
+                <a href="renewal-reminders.php" class="nav-link" data-key="t-renewal-reminders">Renewal Reminders</a>
+            </li>
+            <li class="nav-item">
+                <a href="upgrade-options.php" class="nav-link" data-key="t-upgrade-options">Upgrade Options</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<!-- Campaigns -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarCampaigns" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarCampaigns">
+        <i class="fas fa-tasks"></i>
+
+
+
+        <span data-key="t-campaigns">Campaigns</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarCampaigns">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="active-campaigns.php" class="nav-link" data-key="t-active-campaigns">Active Campaigns</a>
+            </li>
+            <li class="nav-item">
+                <a href="create-campaign.php" class="nav-link" data-key="t-create-campaign">Create Campaign</a>
+            </li>
+            <li class="nav-item">
+                <a href="campaign-analytics.php" class="nav-link" data-key="t-campaign-analytics">Campaign Analytics</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<!-- Website-->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarCustomize" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarCustomize">
+        <i class="fas fa-desktop"></i>
+
+
+        <span data-key="t-customize">Customize</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarCustomize">
+        <ul class="nav nav-sm flex-column">
+            <!-- Header Section -->
+            <li class="nav-item">
+                <a href="header-settings.php" class="nav-link" data-key="t-header-settings">Header Section</a>
+            </li>
+            
+        </ul>
+    </div>
+</li>
+<!-- Financials -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarFinancials" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarFinancials">
+        <i class="fas fa-dollar-sign"></i>
+ <span data-key="t-financials">Financials</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarFinancials">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="day-book.php" class="nav-link" data-key="t-day-book">Day Book</a>
+            </li>
+            <li class="nav-item">
+                <a href="profit-loss.php" class="nav-link" data-key="t-profit-loss">Profit & Loss Statement</a>
+            </li>
+            <li class="nav-item">
+                <a href="balance-sheet.php" class="nav-link" data-key="t-balance-sheet">Balance Sheet</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<!-- Reports -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarReports" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarReports">
+        <i class="fas fa-file-alt"></i>
+        <span data-key="t-reports">Reports</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarReports">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="custom-reports.php" class="nav-link" data-key="t-custom-reports">Custom Reports</a>
+            </li>
+            <li class="nav-item">
+                <a href="donation-reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
+            </li>
+            <li class="nav-item">
+                <a href="campaign-reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>
+            </li>
+            <li class="nav-item">
+                <a href="financial-reports.php" class="nav-link" data-key="t-financial-reports">Financial Reports</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<!-- Settings -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebarSettings" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebarSettings">
+        <i class="fas fa-cog"></i>
+
+        <span data-key="t-settings">Settings</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebarSettings">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="user-roles.php" class="nav-link" data-key="t-user-roles">User Roles</a>
+            </li>
+            <li class="nav-item">
+                <a href="branding.php" class="nav-link" data-key="t-branding">Branding</a>
+            </li>
+            <li class="nav-item">
+                <a href="multi-language-options.php" class="nav-link" data-key="t-multi-language-options">Multi-Language Options</a>
+            </li>
+            <li class="nav-item">
+                <a href="security-settings.php" class="nav-link" data-key="t-security-settings">Security Settings</a>
+            </li>
+        </ul>
+    </div>
+</li>      
+            </ul>
         </div>
         <!-- Sidebar -->
     </div>
