@@ -67,15 +67,11 @@
             <li class="nav-item">
                 <a href="member_list.php" class="nav-link" data-key="t-member-list">Member List</a>
             </li>
-            <li class="nav-item">
-                <a href="membership-plans.php" class="nav-link" data-key="t-membership-plans">Membership Plans</a>
-            </li>
+            
             <li class="nav-item">
                 <a href="renewal-reminders.php" class="nav-link" data-key="t-renewal-reminders">Renewal Reminders</a>
             </li>
-            <li class="nav-item">
-                <a href="upgrade-options.php" class="nav-link" data-key="t-upgrade-options">Upgrade Options</a>
-            </li>
+            
         </ul>
     </div>
 </li>
@@ -97,9 +93,7 @@
             <li class="nav-item">
                 <a href="create-campaign.php" class="nav-link" data-key="t-create-campaign">Create Campaign</a>
             </li>
-            <li class="nav-item">
-                <a href="campaign-analytics.php" class="nav-link" data-key="t-campaign-analytics">Campaign Analytics</a>
-            </li>
+           
         </ul>
     </div>
 </li>
@@ -181,14 +175,12 @@
                 <a href="user-roles.php" class="nav-link" data-key="t-user-roles">User Roles</a>
             </li>
             <li class="nav-item">
-                <a href="branding.php" class="nav-link" data-key="t-branding">Branding</a>
+                <a href="pages-profile.php" class="nav-link" data-key="t-Profile">Profile</a>
             </li>
             <li class="nav-item">
-                <a href="multi-language-options.php" class="nav-link" data-key="t-multi-language-options">Multi-Language Options</a>
+                <a href="pages-profile-settings.php" class="nav-link" data-key="t-pages-profile-settings">Setting</a>
             </li>
-            <li class="nav-item">
-                <a href="security-settings.php" class="nav-link" data-key="t-security-settings">Security Settings</a>
-            </li>
+          
         </ul>
     </div>
 </li>      
