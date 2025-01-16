@@ -116,6 +116,7 @@
 </script>
 
 <?php include 'layouts/vendor-scripts.php'; ?>
+
     <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
     <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
     <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
