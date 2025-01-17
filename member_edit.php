@@ -40,13 +40,16 @@ if($_SERVER['REQUEST_METHOD'] ===  'POST'){
     $update_stmt = $link->prepare($updatequery);
     $update_stmt->bind_param("sdsssssssi", $membership_type, $amount, $method , $name, $email, $phonenumber,  $address, $start_date, $end_date, $membership_id);
     
-    if($update_stmt -> execute()){
+    if($update_stmt->execute()){
         $_SESSION['success'] = 'Membership updated successfully.';
         header('Location: member_list.php');
-    }else{
-        echo "Error updating record: " . $link->error;
+        exit(); // Ensure the script stops after the header redirection
+    } else {
+        // Store the error message in the session and redirect to the same page
+        $_SESSION['error'] = 'Error updating record: ' . $link->error;
+        header('Location: edit_membership.php?membership_id=' . $membership_id);
+        exit(); // Ensure the script stops after the header redirection
     }
-    
 }
 ?>
 <head>

@@ -19,31 +19,38 @@
         <div class="container-fluid">
             <div class="d-flex flex-column">
                 <div class="row h-100">
+                    <div class="mt-3 d-flex align-items-center">
+                        <label for="membershipFilter" class="me-2">Filter by Campaign Status:</label>
+                        <select id="membershipFilter" class="form-select w-25 me-2">
+                            <option value="">All</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                        <button id="filterButton" class="btn btn-primary">Filter</button>
+                    </div>
+
                     <!-- Donation Records Table Card -->
                     <div class="card mt-5">
                         <div class="card-header text-center">
-                            <h3>campaigns History</h3>
+                            <h3>Campaigns History</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="campaignsContainer">
                             <?php
-                            // Include database connection
                             include('Config.php');
                             
-                            // Query to get all records
+                            // Fetch all campaigns
                             $sql = "SELECT * FROM campaigns";
                             $result = $link->query($sql);
 
                             if ($result->num_rows > 0) {
                                 echo "<div class='row'>";
-                                
+
                                 // Output data of each row
                                 while ($row = $result->fetch_assoc()) {
                                     echo "
-                                    <div class='col-sm-6 col-xl-3'>
+                                    <div class='col-sm-6 col-xl-3 campaign-card' data-status='" . $row['status'] . "'>
                                         <div class='card'>
-                                            <img class='card-img-top img-fluid' src='uploads/". $row['image'] ."' alt='Card image cap'height='150' width='150'>
-                                          
-
+                                            <img class='card-img-top img-fluid' src='uploads/" . $row['image'] . "' alt='Card image cap' height='150' width='150'>
                                             <div class='card-body'>
                                                 <h4 class='card-title mb-2'>" . $row['type'] . "</h4>
                                                 <p class='card-text mb-0'>" . $row['description'] . "</p>
@@ -61,7 +68,6 @@
                                 echo "No records found.";
                             }
 
-                            // Close the database connection
                             $link->close();
                             ?>
                         </div>
@@ -72,18 +78,35 @@
     </div>
 </div>
 
-<!-- Initialize DataTables -->
+<!-- JavaScript for Filter Functionality -->
 <script>
     $(document).ready(function() {
+        // Initialize DataTables (if you're using it for another table)
         $('#donationTable').DataTable({
-            "paging": true,           // Enable pagination
-            "searching": true,        // Enable search bar
-            "lengthChange": true,     // Allow changing number of rows displayed
-            "info": true,             // Show table info
-            "ordering": true,         // Enable sorting
-            "responsive": true,       // Make table responsive
-            "pageLength": 10,         // Default number of rows
-            "lengthMenu": [5, 10, 25, 50, 100] // Options for rows per page
+            "paging": true,
+            "searching": true,
+            "lengthChange": true,
+            "info": true,
+            "ordering": true,
+            "responsive": true,
+            "pageLength": 10,
+            "lengthMenu": [5, 10, 25, 50, 100]
+        });
+
+        // Filter campaigns by status
+        $('#filterButton').on('click', function() {
+            var selectedStatus = $('#membershipFilter').val().toLowerCase();
+            
+            // Show or hide campaigns based on the filter
+            $('.campaign-card').each(function() {
+                var campaignStatus = $(this).data('status').toLowerCase();
+                
+                if (selectedStatus === "" || campaignStatus === selectedStatus) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
         });
     });
 </script>

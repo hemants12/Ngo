@@ -31,7 +31,14 @@
                         </select>
                         <button id="filterButton" class="btn btn-primary">Filter</button>
                     </div>
-                    <?php if (isset($_SESSION['success'])): ?>
+          
+
+                    <!-- Donation Records Table Card -->
+                    <div class="card mt-3">
+                        <div class="card-header text-center">
+                            <h3>Membership History</h3>
+                        </div>
+                        <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success" role="alert">
         <?php
         echo $_SESSION['success'];
@@ -47,12 +54,6 @@
         ?>
     </div>
 <?php endif; ?>
-
-                    <!-- Donation Records Table Card -->
-                    <div class="card mt-3">
-                        <div class="card-header text-center">
-                            <h3>Membership History</h3>
-                        </div>
                         <div class="card-body">
                             <?php
                             // Include database connection
