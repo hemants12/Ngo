@@ -23,7 +23,7 @@
                     <!-- Reminder Table Card -->
                     <div class="card mt-3">
                         <div class="card-header text-center">
-                            <h3>Upcoming Expirations (Next 10 Days)</h3>
+                            <h3>Upcoming Expirations (Next 30 Days)</h3>
                         </div>
                         <div class="card-body">
                             <?php
@@ -35,7 +35,7 @@
                             
                             // Query to get records expiring within 10 days
                             $sql = "SELECT * FROM memberships 
-                                    WHERE end_date BETWEEN '$currentDate' AND DATE_ADD('$currentDate', INTERVAL 10 DAY)";
+                                    WHERE end_date BETWEEN '$currentDate' AND DATE_ADD('$currentDate', INTERVAL 30 DAY)";
                             $result = $link->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -64,7 +64,7 @@
                                     </table>
                                   </div>";
                             } else {
-                                echo "<p class='text-center'>No upcoming expirations within the next 10 days.</p>";
+                                echo "<p class='text-center'>No upcoming expirations within the next 30 days.</p>";
                             }
 
                             // Close the database connection
