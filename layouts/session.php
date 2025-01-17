@@ -1,10 +1,10 @@
 <?php
-// Initialize the session
 session_start();
 
-// Check if the user is logged in, if not then redirect him to login page
-// if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-//     header("location: auth-signin-basic.php");
-//     exit;
-// }
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    // If not logged in, redirect to login page
+    header("Location: auth-signin-cover.php");
+    exit();
+}
 ?>

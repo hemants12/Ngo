@@ -95,3 +95,9 @@
 </body>
 
 </html>
+<?php
+
+session_destroy(); // Destroy all sessions
+header("Location: auth-logout-cover.php"); // Redirect to login page
+exit();
+?>
