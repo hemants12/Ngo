@@ -43,24 +43,28 @@
                                                 <th>Donation Amount</th>
                                                 <th>Pan Card</th>
                                                 <th>Date</th>
-                                                <th>Download</th>
-                                                    
+                                                <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>";
                                 
                                 // Output data of each row
-                                // $serial = 1;  
-                                while($row = $result->fetch_assoc()) {
+                                while ($row = $result->fetch_assoc()) {
                                     echo "<tr>
-                                            
                                             <td>" . $row['fullName'] . "</td>
                                             <td>" . $row['phone'] . "</td>
                                             <td>" . $row['donationAmount'] . "</td>
                                             <td>" . $row['idProof'] . "</td>
-                                            <td>" . $row['created_at'] ."</td>
-                                               <td><button class='download-btn' data-id='" . $row['id'] . "'>Download</button></td>
-                                            
+                                            <td>" . $row['created_at'] . "</td>
+                                            <td>
+                                                <button class='btn btn-sm btn-primary download-btn' data-id='" . $row['id'] . "'>Download</button>
+                                                <form method='POST' action='delete_donation.php' style='display:inline;'>
+                                                    <input type='hidden' name='id' value='" . $row['id'] . "'>
+                                                    <button type='submit' class='btn btn-sm btn-danger remove-item-btn' onclick='return confirm(\"Are you sure you want to delete this record?\");'>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
                                           </tr>";
                                 }
 
@@ -96,7 +100,8 @@
             "lengthMenu": [5, 10, 25, 50, 100] // Options for rows per page
         });
     });
-    
+
+    // Handle download button click
     $(document).on('click', '.download-btn', function() {
         const id = $(this).data('id');
         if (id) {
@@ -104,18 +109,9 @@
             window.location.href = 'generate-pdf.php?id=' + id;
         }
     });
-
-
 </script>
 
 <?php include 'layouts/vendor-scripts.php'; ?>
-    <!-- apexcharts -->
-    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-    <!-- Vector map -->
-    <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
-    <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-    <!-- Dashboard init -->
-    <script src="assets/js/pages/dashboard-analytics.init.js"></script>
-    <!-- App js -->
-    <script src="assets/js/app.js"></script>
+<!-- App js -->
+<script src="assets/js/app.js"></script>
 </body>

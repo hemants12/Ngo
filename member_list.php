@@ -1,3 +1,4 @@
+
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
 <head>
@@ -30,7 +31,23 @@
                         </select>
                         <button id="filterButton" class="btn btn-primary">Filter</button>
                     </div>
-                    
+                    <?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success" role="alert">
+        <?php
+        echo $_SESSION['success'];
+        unset($_SESSION['success']); // Remove it after showing
+        ?>
+    </div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php
+        echo $_SESSION['error'];
+        unset($_SESSION['error']); // Remove it after showing
+        ?>
+    </div>
+<?php endif; ?>
+
                     <!-- Donation Records Table Card -->
                     <div class="card mt-3">
                         <div class="card-header text-center">
@@ -55,6 +72,7 @@
                                                 <th>Amount</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
+                                                <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>";
@@ -66,6 +84,17 @@
                                             <td>" . $row['amount'] . "</td>
                                             <td>" . $row['start_date'] ."</td>
                                             <td>" . $row['end_date'] ."</td>
+                                             <td><a class='btn btn-sm btn-primary download-btn' href='member_edit.php?membership_id=" . urlencode($row['membership_id']) . "'>Edit</a>
+                                             <form method='POST' action='delete_member.php' style='display:inline;'>
+                                                    <input type='hidden' name='membership_id' value='" . $row['membership_id'] . "'>
+                                                    <button type='submit' class='btn btn-sm btn-danger remove-item-btn' onclick='return confirm(\"Are you sure you want to delete this record?\");'>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                             </td>
+
+                                             
+
                                           </tr>";
                                 }
 

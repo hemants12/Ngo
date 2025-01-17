@@ -69,7 +69,7 @@
             </li>
             
             <li class="nav-item">
-                <a href="renewal-reminders.php" class="nav-link" data-key="t-renewal-reminders">Renewal Reminders</a>
+                <a href="renewal_reminders.php" class="nav-link" data-key="t-renewal-reminders">Renewal Reminders</a>
             </li>
             
         </ul>
