@@ -34,51 +34,29 @@
                             $result = $link->query($sql);
 
                             if ($result->num_rows > 0) {
-                                echo "<div class='table-responsive'>
-                                        <table id='donationTable' class='table table-bordered'>
-                                            <thead>
-                                                <tr>
-                                                <th>Name</th>
-                                                <th>type</th>
-                                                <th>start_date</th>
-                                                <th>end_date</th>
-                                                <th>description</th>
-                                                <th>target goal</th>
-                                                <th>image</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>";
+                                echo "<div class='row'>";
                                 
                                 // Output data of each row
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>
-                                            <td>" . $row['name'] . "</td>
-                                            <td>" . $row['type'] . "</td>
-                                            <td>" . $row['start_date'] . "</td>
-                                            <td>" . $row['end_date'] . "</td>
-                                            <td>" . $row['description'] . "</td>
-                                            <td>" . $row['target_goal'] . "</td>
-                                            
-                                              <td><img src='uploads/" . $row['image'] . "' alt='' height='100' width='100'  ></td>
-                                             
-                                            <td>" . $row['status'] . "</td>
-                                            <td>
-                                                <button class='btn btn-sm btn-primary download-btn' data-id='" . $row['id'] . "'>Edit</button>
-                                                <form method='POST' action='delete_donation.php' style='display:inline;'>
-                                                    <input type='hidden' name='id' value='" . $row['id'] . "'>
-                                                    <button type='submit' class='btn btn-sm btn-danger remove-item-btn' onclick='return confirm(\"Are you sure you want to delete this record?\");'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </td>
-                                          </tr>";
+                                    echo "
+                                    <div class='col-sm-6 col-xl-3'>
+                                        <div class='card'>
+                                            <img class='card-img-top img-fluid' src='uploads/". $row['image'] ."' alt='Card image cap'height='150' width='150'>
+                                          
+
+                                            <div class='card-body'>
+                                                <h4 class='card-title mb-2'>" . $row['type'] . "</h4>
+                                                <p class='card-text mb-0'>" . $row['description'] . "</p>
+                                            </div>
+                                            <div class='card-footer'>
+                                                <a href='javascript:void(0);' class='card-link link-secondary'>Read More <i class='ri-arrow-right-s-line ms-1 align-middle lh-1'></i></a>
+                                                <a href='javascript:void(0);' class='card-link link-success'>Bookmark <i class='ri-bookmark-line align-middle ms-1 lh-1'></i></a>
+                                            </div>
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->";
                                 }
 
-                                echo "</tbody>
-                                    </table>
-                                  </div>";
+                                echo "</div>";  // Close the row div
                             } else {
                                 echo "No records found.";
                             }
@@ -108,8 +86,6 @@
             "lengthMenu": [5, 10, 25, 50, 100] // Options for rows per page
         });
     });
-
-   
 </script>
 
 <?php include 'layouts/vendor-scripts.php'; ?>
