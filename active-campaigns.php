@@ -248,7 +248,7 @@
                                     </ul>
                                     <!--- Yeh Active Hai --->
                                     <div class="tab-content  text-muted">
-                                        <div class="tab-pane" id="active" role="tabpanel">
+                                        <div class="tab-pane active" id="active" role="tabpanel">
 
                                         <?php 
                             // Default to 'active' status if no filter is selected
