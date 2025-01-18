@@ -1,5 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
+
 <head>
     <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'New Donation')); ?>
     <?php include 'layouts/head-css.php'; ?>
@@ -35,41 +36,41 @@
                             <h3>Campaigns History</h3>
                         </div>
                         <div class="card-body" id="campaignsContainer">
-                            <?php
-                            include('Config.php');
-                            
-                            // Fetch all campaigns
-                            $sql = "SELECT * FROM campaigns";
-                            $result = $link->query($sql);
+                        <?php
+                        include('config.php');
+                        $query = "SELECT `id`, `name`, `type`, `start_date`, `end_date`, `description`, `target_goal`, `image`, `status`, `created_at` FROM `campaigns` WHERE 1";
 
-                            if ($result->num_rows > 0) {
-                                echo "<div class='row'>";
+$result = $link->query($query);
 
-                                // Output data of each row
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "
-                                    <div class='col-sm-6 col-xl-3 campaign-card' data-status='" . $row['status'] . "'>
-                                        <div class='card'>
-                                            <img class='card-img-top img-fluid' src='uploads/" . $row['image'] . "' alt='Card image cap' height='150' width='150'>
-                                            <div class='card-body'>
-                                                <h4 class='card-title mb-2'>" . $row['type'] . "</h4>
-                                                <p class='card-text mb-0'>" . $row['description'] . "</p>
-                                            </div>
-                                            <div class='card-footer'>
-                                                <a href='javascript:void(0);' class='card-link link-secondary'>Read More <i class='ri-arrow-right-s-line ms-1 align-middle lh-1'></i></a>
-                                                <a href='javascript:void(0);' class='card-link link-success'>Bookmark <i class='ri-bookmark-line align-middle ms-1 lh-1'></i></a>
-                                            </div>
-                                        </div><!-- end card -->
-                                    </div><!-- end col -->";
-                                }
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      
 
-                                echo "</div>";  // Close the row div
-                            } else {
-                                echo "No records found.";
-                            }
+        // Safely access the id
+        if (isset($row['id'])) {
+            echo "
+            <div class='col-sm-6 col-xl-3 campaign-card' data-status='" . $row['status'] . "'>
+                <div class='card'>
+                    <img class='card-img-top img-fluid' src='uploads/" . $row['image'] . "' alt='Card image cap' height='150' width='150'>
+                    
+                    <div class='card-body'>
+                        <h4 class='card-title mb-2'>" . $row['type'] . "</h4>
+                        <p class='card-text mb-0'>" . $row['description'] . "</p>
+                        <button class='btn btn-primary mb-0' onclick='toggleStatus(" . $row['id'] . ", \"" . $row['status'] . "\")'>
+                            " . htmlspecialchars($row['status']) . "
+                        </button>
+                    </div>
+                </div>
+            </div>";
+        } else {
+            echo " ID is missing for this record.";
+        }
+    }
+} else {
+    echo "No records found.";
+}
+?>
 
-                            $link->close();
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -109,6 +110,31 @@
             });
         });
     });
+    
+function toggleStatus(id, currentStatus) {
+    // Determine the new status based on the current status
+    var newStatus = (currentStatus === 'active') ? 'inactive' : 'active';
+
+    // Create an AJAX request to send the id and new status to the PHP script
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "update_status.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Send the data
+    xhr.send("id=" + id + "&status=" + newStatus);
+
+    // Update the button text after the status has been updated
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            // Update the button text to reflect the new status
+            var button = document.querySelector('[onclick="toggleStatus(' + id + ', \'' + currentStatus + '\')"]');
+            button.textContent = newStatus;
+            button.classList.toggle('btn-primary');
+            button.classList.toggle('btn-secondary');
+        }
+    };
+}
+
 </script>
 
 <?php include 'layouts/vendor-scripts.php'; ?>

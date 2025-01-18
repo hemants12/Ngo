@@ -126,7 +126,7 @@
     <div class="collapse menu-dropdown" id="sidebarFinancials">
         <ul class="nav nav-sm flex-column">
             <li class="nav-item">
-                <a href="day-book.php" class="nav-link" data-key="t-day-book">Day Book</a>
+                <a href="day_book.php" class="nav-link" data-key="t-day-book">Day Book</a>
             </li>
             <li class="nav-item">
                 <a href="profit-loss.php" class="nav-link" data-key="t-profit-loss">Profit & Loss Statement</a>
