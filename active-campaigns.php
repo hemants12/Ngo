@@ -11,7 +11,225 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <!-- jQuery UI CSS and JS for Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+
+        .new-features-btn {
+            padding: 10px 20px;
+            background-color: #5865F2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .campaign-section {
+            background-color: #fff;
+            padding: 5px 0 0 0;
+            border-radius: 10px;
+        }
+
+        .campaign-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        .campaign-tag {
+            background-color: #5865F2; /* Background color */
+            color: #fff; /* Text color */
+            padding: 8px 12px; /* Padding inside the box */
+            border-radius: 8px; /* Rounded corners for the box */
+            font-size: 14px; /* Font size */
+            font-weight: bold; /* Bold text */
+            display: inline-block; /* Ensures the box adjusts to the text size */
+            margin-right: 15px; /* Space between the box and the campaign details */
+            text-align: center; /* Centers the text inside */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+            border: 1px solid #4752C4; /* Optional border */
+            }
+            .create-campaign-btn {
+                padding: 10px 20px;
+                background-color: #5865F2;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .dropdown select {
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .tabs ul {
+                display: flex;
+                list-style: none;
+                margin-bottom: 20px;
+                padding-left: 0;
+            }
+
+            .tabs li {
+                padding: 10px 10px;
+                cursor: pointer;
+            }
+
+            .tabs .active {
+                border-bottom: 3px solid #5865F2;
+            }
+
+            .campaign-list {
+                background-color: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+
+            .campaign-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px;
+                border-bottom: 1px solid #ddd;
+                flex-wrap: wrap; /* Allow wrapping to move the metrics to a new row */
+            }
+
+            .campaign-item:last-child {
+                border-bottom: none;
+            }
+
+            .campaign-details {
+                flex: 3;
+            }
+
+            .campaign-details h4 {
+                font-size: 18px;
+                margin: 0 0 5px;
+                color: #333;
+            }
+
+            .campaign-details p {
+                margin: 0;
+                color: #666;
+                font-size: 14px;
+            }
+
+            .metrics {
+                flex: 1;
+                display: flex;
+                justify-content: space-around;
+                width: 100%; /* Ensure metrics take up the full width */
+                margin-top: 10px; /* Add spacing between rows */
+                text-align: center;
+            }
+
+            .metrics p {
+                margin: 0;
+            }
+
+            .metrics p strong {
+                display: block;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .campaign-actions {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                font-size: 14px;
+                color: #666;
+            }
+
+            .status-toggle-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+                background-color: #5865F2; /* Active state color */
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .status-toggle-btn.inactive {
+                background-color: #FF4B4B; /* Inactive state color */
+            }
+
+            .status-toggle-btn:hover {
+                opacity: 0.9; /* Slight opacity effect on hover */
+            }
+
+            .campaign-date {
+                color: #888;
+                font-size: 12px;
+            }
+            .campaign-count-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .campaign-count {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .datepicker-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .datepicker-container input {
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+
+            @media (max-width: 768px) {
+                .campaign-item {
+                    flex-direction: column; /* Stack items for smaller screens */
+                    align-items: flex-start;
+                }
+
+                .metrics {
+                    flex-direction: column; /* Stack metrics vertically on smaller screens */
+                }
+                .campaign-count-section {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .datepicker-container {
+                    margin-top: 10px;
+                    width: 100%;
+                }
+
+                .datepicker-container input {
+                    width: 100%;
+                }
+                .metrics {
+                    display: grid; /* Change to grid layout for mobile screens */
+            grid-template-columns: repeat(2, 1fr); /* Two metrics per row */
+            gap: 10px; /* Add spacing between items */
+            }
+             }
+        
+    </style>
 </head>
+
+
 <body>
 <div id="layout-wrapper">
 <?php include 'layouts/menu.php'; ?>
@@ -20,94 +238,92 @@
         <div class="container-fluid">
             <div class="d-flex flex-column">
                 <div class="row h-100">
-                    <div class="mt-3 d-flex align-items-center">
-                        <label for="membershipFilter" class="me-2">Filter by Campaign Status:</label>
-                        <select id="membershipFilter" class="form-select w-25 me-2">
-                            <option value="">All</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                        <button id="filterButton" class="btn btn-primary">Filter</button>
-                    </div>
-
                     <!-- Donation Records Table Card -->
-                    <div class="card mt-5">
-                        <div class="card-header text-center">
-                            <h3>Campaigns History</h3>
+                    <div class="card mt-5">       
+                    <!-- Campaigns Section -->
+                    <div class="campaign-section">
+                    <div class="card-header text-center">
+                            <h3>Campaigns</h3>
                         </div>
-                        <div class="card-body" id="campaignsContainer">
-                        <?php
-                        include('config.php');
-                        $query = "SELECT `id`, `name`, `type`, `start_date`, `end_date`, `description`, `target_goal`, `image`, `status`, `created_at` FROM `campaigns` WHERE 1";
-
-$result = $link->query($query);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      
-
-        // Safely access the id
-        if (isset($row['id'])) {
-            echo "
-            <div class='col-sm-6 col-xl-3 campaign-card' data-status='" . $row['status'] . "'>
-                <div class='card'>
-                    <img class='card-img-top img-fluid' src='uploads/" . $row['image'] . "' alt='Card image cap' height='150' width='150'>
+                    </div>
                     
-                    <div class='card-body'>
-                        <h4 class='card-title mb-2'>" . $row['type'] . "</h4>
-                        <p class='card-text mb-0'>" . $row['description'] . "</p>
-                        <button class='btn btn-primary mb-0' onclick='toggleStatus(" . $row['id'] . ", \"" . $row['status'] . "\")'>
-                            " . htmlspecialchars($row['status']) . "
-                        </button>
+                    <!-- Tabs Section -->
+                    <div class="tabs">
+                        <ul>
+                            <li class="active">Active 24</li>
+                            <li>Completed 179</li>
+                        </ul>
                     </div>
-                </div>
-            </div>";
-        } else {
-            echo " ID is missing for this record.";
-        }
-    }
-} else {
-    echo "No records found.";
-}
-?>
 
+                    <!-- New Campaign Count and Datepicker Section -->
+                    <div class="campaign-count-section">
+                        <span class="campaign-count">24 Campaigns</span>
+                        <div class="datepicker-container">
+                            <span>Select Date Range:</span>
+                            <input type="text" id="datepicker" placeholder="Select Date" />
                         </div>
                     </div>
-                </div>
+                       <div class="campaign-list">
+                       <?php
+                            include('Config.php');
+                            $sql = "SELECT * FROM campaigns";
+                            $result = $link->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+                        <div class="campaign-item">
+                        <div class="campaign-tag">
+                                w
+                          </div>
+                            <div class="campaign-details">
+                                <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
+                                <p>
+                                    
+                                <?php echo htmlspecialchars($row['description']);   ?>
+  
+
+
+                            
+                            </p> 
+                            </div>
+                            <!-- Campaign Actions on First Row -->
+                           
+                        </div>
+
+                        <!-- Metrics Section on Second Row -->
+                        <div class="metrics">
+                            <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
+                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
+                            <p><strong>17.7%</strong><br>Clicked</p>  
+                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Converted</p>  
+                        </div>
+                        <?php
+                }
+            } else {
+                echo "<p>No campaigns found.</p>";
+            } 
+            ?>
+            </div>
+            </div>
             </div>
         </div>
     </div>
 </div>
+  
 
-<!-- JavaScript for Filter Functionality -->
+<!-- Initialize Datepicker -->
 <script>
     $(document).ready(function() {
-        // Initialize DataTables (if you're using it for another table)
-        $('#donationTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "lengthChange": true,
-            "info": true,
-            "ordering": true,
-            "responsive": true,
-            "pageLength": 10,
-            "lengthMenu": [5, 10, 25, 50, 100]
-        });
-
-        // Filter campaigns by status
-        $('#filterButton').on('click', function() {
-            var selectedStatus = $('#membershipFilter').val().toLowerCase();
-            
-            // Show or hide campaigns based on the filter
-            $('.campaign-card').each(function() {
-                var campaignStatus = $(this).data('status').toLowerCase();
-                
-                if (selectedStatus === "" || campaignStatus === selectedStatus) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
+        // Initialize Datepicker for selecting range
+        $("#datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd MM yy",
+            onSelect: function(selectedDate) {
+                // You can handle the selected date here if needed
+                console.log("Selected date: " + selectedDate);
+            }
         });
     });
     
@@ -137,6 +353,22 @@ function toggleStatus(id, currentStatus) {
 
 </script>
 
+
+
+
+
+<script>
+    function toggleStatus(button) {
+    if (button.textContent === "Active") {
+        button.textContent = "Inactive";
+        button.classList.add("inactive");
+    } else {
+        button.textContent = "Active";
+        button.classList.remove("inactive");
+    }
+}
+
+</script>
 <?php include 'layouts/vendor-scripts.php'; ?>
 <!-- App js -->
 <script src="assets/js/app.js"></script>
