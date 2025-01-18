@@ -287,7 +287,26 @@
                                         <div class="metrics">
                                             <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
                                             <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
-                                            <p><strong>17.7%</strong><br>Complete</p>  
+                                            <!-- <p><strong>17.7%</strong><br>Complete</p> -->
+                                            <p><strong>
+                                            <p><strong>
+    <?php 
+    // Fetching target goal and cam_amount from the database
+    $targetGoal = (float) $row['target_goal']; // Cast to float
+    $camAmount = (float) $row['cam_amount']; // Cast to float
+    
+    // Calculate the percentage of the goal achieved
+    $percentageComplete = 0;
+    if ($targetGoal > 0) {
+        $percentageComplete = ($camAmount / $targetGoal) * 100;
+    }
+    
+    // Display the percentage completed
+    echo number_format($percentageComplete, 2) . "%"; 
+    ?>
+</strong><br>Complete</p>
+
+</strong><br>Complete</p>  
 
                                             <?php
                                             $endDate = $row['end_date'];
@@ -319,6 +338,7 @@
 </div>
 
 <script>
+    
 // Function to filter campaigns based on the selected status
 function filterCampaigns(filterType) {
     // Send the selected filter type via POST to reload the page with the filtered data
