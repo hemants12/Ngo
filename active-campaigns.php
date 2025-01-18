@@ -1,20 +1,14 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
-
 <head>
     <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'New Donation')); ?>
-    <?php include 'layouts/head-css.php'; ?>
-    
+    <?php include 'layouts/head-css.php'; ?>   
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <!-- jQuery UI CSS and JS for Datepicker -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <style>
 
         .new-features-btn {
@@ -219,10 +213,7 @@
         
     </style>
 </head>
-
-
 <body>
-
 <body>
 <div id="layout-wrapper">
     <?php include 'layouts/menu.php'; ?>
@@ -238,20 +229,28 @@
                                 </div>
                             </div>
                             <div class="tabs">
-                                <ul>
-                                    <li class="active" onclick="filterCampaigns('active')">
-                                        <button>Active</button>
-                                    </li>
-                                    <li onclick="filterCampaigns('inactive')">
-                                        <button>Inactive</button>
-                                    </li>
-                                    <li onclick="filterCampaigns('completed')">
-                                        <button>Completed</button>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="nav nav-tabs mb-3" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab" aria-selected="false">
+                                                Active
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " data-bs-toggle="tab" href="#inactive" role="tab" aria-selected="false">
+                                                Inactive
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#complete" role="tab" aria-selected="false">
+                                            Complete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!--- Yeh Active Hai --->
+                                    <div class="tab-content  text-muted">
+                                        <div class="tab-pane" id="active" role="tabpanel">
 
-                            <?php 
+                                        <?php 
                             // Default to 'active' status if no filter is selected
                             $filterType = isset($_POST['filter']) ? $_POST['filter'] : 'active';
 
@@ -309,6 +308,141 @@
                                     echo "<p>No campaigns found.</p>";
                                 }
                                 ?> 
+                                        </div>
+                                     
+                                    </div>
+                                    <!--- Yeh Inactive Hai --->
+                                    <div class="tab-content  text-muted">
+                                        <div class="tab-pane" id="inactive" role="tabpanel">
+
+                                        <?php 
+                            // Default to 'active' status if no filter is selected
+                            $filterType = isset($_POST['filter']) ? $_POST['filter'] : 'active';
+
+                            // Query to count the campaigns based on the selected filter (active/inactive)
+                            $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE status = '$filterType'";
+                            $result_count = $link->query($sql_count);
+                            $row_count = $result_count->fetch_assoc();
+                            $campaignCount = $row_count['campaign_count'];
+                            ?>
+
+                            <div class="campaign-count-section">
+                                <span class="campaign-count">Total <?php echo $campaignCount ?> <?php echo ucfirst($filterType) ?>Inactive Campaigns</span>
+                            </div>
+                            <div class="campaign-list" id="campaign-list-container">
+                                <?php
+                                // Query to fetch campaigns based on selected filter status
+                                $sql = "SELECT * FROM campaigns WHERE status = '$filterType'";
+                                $result = $link->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="campaign-item">
+                                            <div class="campaign-tag">
+                                                <?php $type = $row['type']; echo strtoupper(substr($type, 0, 1)); ?>
+                                            </div>
+                                            <div class="campaign-details">
+                                                <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
+                                                <p><?php echo htmlspecialchars($row['description']); ?></p> 
+                                            </div>
+                                            <div class="status"><?php echo $row['status']; ?></div>
+                                        </div>
+                                        <div class="metrics">
+                                            <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
+                                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
+                                            <p><strong>17.7%</strong><br>Complete</p>  
+
+                                            <?php
+                                            $endDate = $row['end_date'];
+                                            $endDateTime = new DateTime($endDate);
+                                            $currentDate = new DateTime();
+                                            $interval = $currentDate->diff($endDateTime);
+                                            if ($currentDate < $endDateTime) {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expires in " . $interval->days . " days</p>";
+                                            } else {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expired " . $interval->days . " days ago</p>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No campaigns found.</p>";
+                                }
+                                ?> 
+                                        </div>
+                                     
+                                    </div>
+                                    <!--- Yeh Complete Hai --->
+                                    <div class="tab-content  text-muted">
+                                    <div class="tab-pane" id="complete" role="tabpanel">
+
+                                        <?php 
+                            // Default to 'active' status if no filter is selected
+                            $filterType = isset($_POST['filter']) ? $_POST['filter'] : 'active';
+
+                            // Query to count the campaigns based on the selected filter (active/inactive)
+                            $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE status = '$filterType'";
+                            $result_count = $link->query($sql_count);
+                            $row_count = $result_count->fetch_assoc();
+                            $campaignCount = $row_count['campaign_count'];
+                            ?>
+
+                            <div class="campaign-count-section">
+                                <span class="campaign-count">Total <?php echo $campaignCount ?> <?php echo ucfirst($filterType) ?> Complete Campaigns</span>
+                            </div>
+                            <div class="campaign-list" id="campaign-list-container">
+                                <?php
+                                // Query to fetch campaigns based on selected filter status
+                                $sql = "SELECT * FROM campaigns WHERE status = '$filterType'";
+                                $result = $link->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="campaign-item">
+                                            <div class="campaign-tag">
+                                                <?php $type = $row['type']; echo strtoupper(substr($type, 0, 1)); ?>
+                                            </div>
+                                            <div class="campaign-details">
+                                                <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
+                                                <p><?php echo htmlspecialchars($row['description']); ?></p> 
+                                            </div>
+                                            <div class="status"><?php echo $row['status']; ?></div>
+                                        </div>
+                                        <div class="metrics">
+                                            <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
+                                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
+                                            <p><strong>17.7%</strong><br>Complete</p>  
+
+                                            <?php
+                                            $endDate = $row['end_date'];
+                                            $endDateTime = new DateTime($endDate);
+                                            $currentDate = new DateTime();
+                                            $interval = $currentDate->diff($endDateTime);
+                                            if ($currentDate < $endDateTime) {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expires in " . $interval->days . " days</p>";
+                                            } else {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expired " . $interval->days . " days ago</p>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No campaigns found.</p>";
+                                }
+                                ?> 
+                                        </div>
+                                     
+                                    </div>
+                            </div>
+
                             </div>
                         </div>
                     </div>
@@ -317,33 +451,6 @@
         </div>
     </div>
 </div>
-
-<script>
-// Function to filter campaigns based on the selected status
-function filterCampaigns(filterType) {
-    // Send the selected filter type via POST to reload the page with the filtered data
-    $.ajax({
-        url: '', // Same page
-        type: 'POST',
-        data: { filter: filterType },
-        success: function(response) {
-            // Update the campaign list container with the filtered content
-            $('#campaign-list-container').html(response);
-            
-            // Update the active tab style
-            $('.tabs ul li').removeClass('active');
-            $('.tabs ul li').each(function() {
-                if ($(this).text().toLowerCase() === filterType) {
-                    $(this).addClass('active');
-                }
-            });
-        },
-        error: function() {
-            console.error('Error filtering campaigns.');
-        }
-    });
-}
-</script>
 
 <?php include 'layouts/vendor-scripts.php'; ?>
 <!-- App js -->
