@@ -88,6 +88,7 @@
                 border-radius: 10px;
                 overflow: hidden;
                 margin-bottom: 20px;
+
             }
 
             .campaign-item {
@@ -95,7 +96,7 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 20px;
-                border-bottom: 1px solid #ddd;
+                border-top: 2px solid;
                 flex-wrap: wrap; /* Allow wrapping to move the metrics to a new row */
             }
 
@@ -126,6 +127,8 @@
                 width: 100%; /* Ensure metrics take up the full width */
                 margin-top: 10px; /* Add spacing between rows */
                 text-align: center;
+             
+                padding-bottom:20px;
             }
 
             .metrics p {
@@ -147,26 +150,7 @@
                 color: #666;
             }
 
-            .status-toggle-btn {
-                padding: 8px 16px;
-                font-size: 14px;
-                font-weight: bold;
-                color: #fff;
-                background-color: #5865F2; /* Active state color */
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-            .status-toggle-btn.inactive {
-                background-color: #FF4B4B; /* Inactive state color */
-            }
-
-            .status-toggle-btn:hover {
-                opacity: 0.9; /* Slight opacity effect on hover */
-            }
-
+  
             .campaign-date {
                 color: #888;
                 font-size: 12px;
@@ -196,7 +180,14 @@
                 border-radius: 5px;
                 margin-left: 10px;
             }
+           .status{
+                 background-color: red;
+                font-size: 16px;
+                padding: 7px;
+                border-radius: 5px;
+                color: white;
 
+           }
             @media (max-width: 768px) {
                 .campaign-item {
                     flex-direction: column; /* Stack items for smaller screens */
@@ -231,144 +222,129 @@
 
 
 <body>
+
+<body>
 <div id="layout-wrapper">
-<?php include 'layouts/menu.php'; ?>
-<div class="main-content">
-    <div class="page-content">
-        <div class="container-fluid">
-            <div class="d-flex flex-column">
-                <div class="row h-100">
-                    <!-- Donation Records Table Card -->
-                    <div class="card mt-5">       
-                    <!-- Campaigns Section -->
-                    <div class="campaign-section">
-                    <div class="card-header text-center">
-                            <h3>Campaigns</h3>
-                        </div>
-                    </div>
-                    
-                    <!-- Tabs Section -->
-                    <div class="tabs">
-                        <ul>
-                            <li class="active">Active 24</li>
-                            <li>Completed 179</li>
-                        </ul>
-                    </div>
-
-                    <!-- New Campaign Count and Datepicker Section -->
-                    <div class="campaign-count-section">
-                        <span class="campaign-count">24 Campaigns</span>
-                        <div class="datepicker-container">
-                            <span>Select Date Range:</span>
-                            <input type="text" id="datepicker" placeholder="Select Date" />
-                        </div>
-                    </div>
-                       <div class="campaign-list">
-                       <?php
-                            include('Config.php');
-                            $sql = "SELECT * FROM campaigns";
-                            $result = $link->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    ?>
-                        <div class="campaign-item">
-                        <div class="campaign-tag">
-                                w
-                          </div>
-                            <div class="campaign-details">
-                                <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
-                                <p>
-                                    
-                                <?php echo htmlspecialchars($row['description']);   ?>
-  
-
-
-                            
-                            </p> 
+    <?php include 'layouts/menu.php'; ?>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="d-flex flex-column">
+                    <div class="row h-100">
+                        <div class="card mt-5">       
+                            <div class="campaign-section">
+                                <div class="card-header text-center">
+                                    <h3>Campaigns</h3>
+                                </div>
                             </div>
-                            <!-- Campaign Actions on First Row -->
-                           
-                        </div>
+                            <div class="tabs">
+                                <ul>
+                                    <li class="active" onclick="filterCampaigns('active')">
+                                        <button>Active</button>
+                                    </li>
+                                    <li onclick="filterCampaigns('inactive')">
+                                        <button>Inactive</button>
+                                    </li>
+                                    <li onclick="filterCampaigns('completed')">
+                                        <button>Completed</button>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <!-- Metrics Section on Second Row -->
-                        <div class="metrics">
-                            <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
-                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
-                            <p><strong>17.7%</strong><br>Clicked</p>  
-                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Converted</p>  
+                            <?php 
+                            // Default to 'active' status if no filter is selected
+                            $filterType = isset($_POST['filter']) ? $_POST['filter'] : 'active';
+
+                            // Query to count the campaigns based on the selected filter (active/inactive)
+                            $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE status = '$filterType'";
+                            $result_count = $link->query($sql_count);
+                            $row_count = $result_count->fetch_assoc();
+                            $campaignCount = $row_count['campaign_count'];
+                            ?>
+
+                            <div class="campaign-count-section">
+                                <span class="campaign-count">Total <?php echo $campaignCount ?> <?php echo ucfirst($filterType) ?> Campaigns</span>
+                            </div>
+                            <div class="campaign-list" id="campaign-list-container">
+                                <?php
+                                // Query to fetch campaigns based on selected filter status
+                                $sql = "SELECT * FROM campaigns WHERE status = '$filterType'";
+                                $result = $link->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="campaign-item">
+                                            <div class="campaign-tag">
+                                                <?php $type = $row['type']; echo strtoupper(substr($type, 0, 1)); ?>
+                                            </div>
+                                            <div class="campaign-details">
+                                                <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
+                                                <p><?php echo htmlspecialchars($row['description']); ?></p> 
+                                            </div>
+                                            <div class="status"><?php echo $row['status']; ?></div>
+                                        </div>
+                                        <div class="metrics">
+                                            <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
+                                            <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
+                                            <p><strong>17.7%</strong><br>Complete</p>  
+
+                                            <?php
+                                            $endDate = $row['end_date'];
+                                            $endDateTime = new DateTime($endDate);
+                                            $currentDate = new DateTime();
+                                            $interval = $currentDate->diff($endDateTime);
+                                            if ($currentDate < $endDateTime) {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expires in " . $interval->days . " days</p>";
+                                            } else {
+                                                echo "<p><strong>" . htmlspecialchars($endDate) . "</strong><br>";
+                                                echo "Expired " . $interval->days . " days ago</p>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No campaigns found.</p>";
+                                }
+                                ?> 
+                            </div>
                         </div>
-                        <?php
-                }
-            } else {
-                echo "<p>No campaigns found.</p>";
-            } 
-            ?>
-            </div>
-            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-  
 
-<!-- Initialize Datepicker -->
 <script>
-    $(document).ready(function() {
-        // Initialize Datepicker for selecting range
-        $("#datepicker").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "dd MM yy",
-            onSelect: function(selectedDate) {
-                // You can handle the selected date here if needed
-                console.log("Selected date: " + selectedDate);
-            }
-        });
-    });
-    
-function toggleStatus(id, currentStatus) {
-    // Determine the new status based on the current status
-    var newStatus = (currentStatus === 'active') ? 'inactive' : 'active';
-
-    // Create an AJAX request to send the id and new status to the PHP script
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "update_status.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    // Send the data
-    xhr.send("id=" + id + "&status=" + newStatus);
-
-    // Update the button text after the status has been updated
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            // Update the button text to reflect the new status
-            var button = document.querySelector('[onclick="toggleStatus(' + id + ', \'' + currentStatus + '\')"]');
-            button.textContent = newStatus;
-            button.classList.toggle('btn-primary');
-            button.classList.toggle('btn-secondary');
+// Function to filter campaigns based on the selected status
+function filterCampaigns(filterType) {
+    // Send the selected filter type via POST to reload the page with the filtered data
+    $.ajax({
+        url: '', // Same page
+        type: 'POST',
+        data: { filter: filterType },
+        success: function(response) {
+            // Update the campaign list container with the filtered content
+            $('#campaign-list-container').html(response);
+            
+            // Update the active tab style
+            $('.tabs ul li').removeClass('active');
+            $('.tabs ul li').each(function() {
+                if ($(this).text().toLowerCase() === filterType) {
+                    $(this).addClass('active');
+                }
+            });
+        },
+        error: function() {
+            console.error('Error filtering campaigns.');
         }
-    };
+    });
 }
-
 </script>
 
-
-
-
-
-<script>
-    function toggleStatus(button) {
-    if (button.textContent === "Active") {
-        button.textContent = "Inactive";
-        button.classList.add("inactive");
-    } else {
-        button.textContent = "Active";
-        button.classList.remove("inactive");
-    }
-}
-
-</script>
 <?php include 'layouts/vendor-scripts.php'; ?>
 <!-- App js -->
 <script src="assets/js/app.js"></script>
