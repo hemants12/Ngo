@@ -5,3 +5,226 @@ Website: https://themesbrand.com/
 Contact: support@themesbrand.com
 File: Custom Css File
 */
+
+
+.new-features-btn {
+    padding: 10px 20px;
+    background-color: #5865F2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.campaign-section {
+    background-color: #fff;
+    padding: 5px 0 0 0;
+    border-radius: 10px;
+}
+
+.campaign-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.campaign-tag {
+    background-color: #5865F2;
+    /* Background color */
+    color: #fff;
+    /* Text color */
+    padding: 8px 12px;
+    /* Padding inside the box */
+    border-radius: 8px;
+    /* Rounded corners for the box */
+    font-size: 14px;
+    /* Font size */
+    font-weight: bold;
+    /* Bold text */
+    display: inline-block;
+    /* Ensures the box adjusts to the text size */
+    margin-right: 15px;
+    /* Space between the box and the campaign details */
+    text-align: center;
+    /* Centers the text inside */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Optional shadow for depth */
+    border: 1px solid #4752C4;
+}
+
+.create-campaign-btn {
+    padding: 10px 20px;
+    background-color: #5865F2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tabs ul {
+    display: flex;
+    list-style: none;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.tabs li {
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+
+.campaign-list {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+}
+
+.campaign-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 2px solid;
+    flex-wrap: wrap;
+    /* Allow wrapping to move the metrics to a new row */
+}
+
+.campaign-item:last-child {
+    border-bottom: none;
+}
+
+.campaign-details {
+    flex: 3;
+}
+
+.campaign-details h4 {
+    font-size: 18px;
+    margin: 0 0 5px;
+    color: #333;
+}
+
+.campaign-details p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.metrics {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    /* Ensure metrics take up the full width */
+    margin-top: 10px;
+    /* Add spacing between rows */
+    text-align: center;
+
+    padding-bottom: 20px;
+}
+
+.metrics p {
+    margin: 0;
+}
+
+.metrics p strong {
+    display: block;
+    font-size: 16px;
+    color: #333;
+}
+
+.campaign-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+    color: #666;
+}
+
+
+.campaign-date {
+    color: #888;
+    font-size: 12px;
+}
+
+.campaign-count-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.campaign-count {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.datepicker-container {
+    display: flex;
+    align-items: center;
+}
+
+.datepicker-container input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.status {
+    background-color: red;
+    font-size: 16px;
+    padding: 7px;
+    border-radius: 5px;
+    color: white;
+
+}
+
+@media (max-width: 768px) {
+    .campaign-item {
+        flex-direction: column;
+        /* Stack items for smaller screens */
+        align-items: flex-start;
+    }
+
+    .metrics {
+        flex-direction: column;
+        /* Stack metrics vertically on smaller screens */
+    }
+
+    .campaign-count-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .datepicker-container {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .datepicker-container input {
+        width: 100%;
+    }
+
+    .metrics {
+        display: grid;
+        /* Change to grid layout for mobile screens */
+        grid-template-columns: repeat(2, 1fr);
+        /* Two metrics per row */
+        gap: 10px;
+        /* Add spacing between items */
+    }
+}

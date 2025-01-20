@@ -1,4 +1,3 @@
-
 <?php include 'layouts/main.php'; ?>
 
 <?php
@@ -124,16 +123,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                                 <div class="mb-3 <?= !empty($useremail_err) ? 'has-error' : ''; ?>">
                                                     <label for="useremail" class="form-label">Email</label>
-                                                    <input type="text" class="form-control" name='useremail' id="useremail" value="<?=$useremail?>"  placeholder="Enter useremail">
-                                                    <span class="text-danger"><?=$useremail_err?></span>
+                                                    <input type="text" class="form-control" name='useremail' id="useremail" value="<?= $useremail ?>" placeholder="Enter useremail">
+                                                    <span class="text-danger"><?= $useremail_err ?></span>
                                                 </div>
 
                                                 <div class="mb-3 <?= !empty($password_err) ? 'has-error' : ''; ?>">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5 password-input" name='password' placeholder="Enter password" value="<?=$password?>"  id="password-input">
+                                                        <input type="password" class="form-control pe-5 password-input" name='password' placeholder="Enter password" value="<?= $password ?>" id="password-input">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                        <span class="text-danger"><?=$password_err?></span>
+                                                        <span class="text-danger"><?= $password_err ?></span>
                                                     </div>
                                                 </div>
 
