@@ -97,6 +97,30 @@
         </ul>
     </div>
 </li>
+<!-- Employee -->
+<li class="nav-item">
+    <a class="nav-link menu-link" href="#sidebaremployee" data-bs-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="sidebaremployee">
+        <i class="fas fa-tasks"></i>
+
+
+
+        <span data-key="t-employee">Employees</span>
+    </a>
+    <div class="collapse menu-dropdown" id="sidebaremployee">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="Staff.php" class="nav-link" data-key="t-staffs">Staffs</a>
+            </li>
+            <li class="nav-item">
+                <a href="attandance.php" class="nav-link" data-key="t-attandance">Attandance</a>
+            </li>
+            <li class="nav-item">
+                <a href="user-roles.php" class="nav-link" data-key="t-user-roles">User Roles</a>
+            </li>
+        </ul>
+    </div>
+</li>
 <!-- Website-->
 <li class="nav-item">
     <a class="nav-link menu-link" href="#sidebarCustomize" data-bs-toggle="collapse" role="button"
@@ -171,9 +195,7 @@
     </a>
     <div class="collapse menu-dropdown" id="sidebarSettings">
         <ul class="nav nav-sm flex-column">
-            <li class="nav-item">
-                <a href="user-roles.php" class="nav-link" data-key="t-user-roles">User Roles</a>
-            </li>
+           
             <li class="nav-item">
                 <a href="pages-profile.php" class="nav-link" data-key="t-Profile">Profile</a>
             </li>
