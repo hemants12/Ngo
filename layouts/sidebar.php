@@ -101,7 +101,8 @@
 <li class="nav-item">
     <a class="nav-link menu-link" href="#sidebaremployee" data-bs-toggle="collapse" role="button"
         aria-expanded="false" aria-controls="sidebaremployee">
-        <i class="fas fa-tasks"></i>
+        <i class="fas fa-user-tie"></i>
+
 
 
 
@@ -174,7 +175,7 @@
                 <a href="custom-reports.php" class="nav-link" data-key="t-custom-reports">Custom Reports</a>
             </li>
             <li class="nav-item">
-                <a href="donation-reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
+                <a href="donation_reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
             </li>
             <li class="nav-item">
                 <a href="campaign-reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 Template Name: Velzon - Admin & Dashboard Template
 Author: Themesbrand
@@ -7,6 +8,8 @@ File: Custom Css File
 */
 
 
+=======
+>>>>>>> 8071191263f8938b37af2edcabeef805d7d36158
 .new-features-btn {
     padding: 10px 20px;
     background-color: #5865F2;
@@ -81,6 +84,12 @@ File: Custom Css File
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+.tabs .active {
+    /* border-bottom: 3px solid #5865F2; */
+}
+>>>>>>> 8071191263f8938b37af2edcabeef805d7d36158
 
 .campaign-list {
     background-color: #fff;
@@ -183,7 +192,10 @@ File: Custom Css File
     border-radius: 5px;
     margin-left: 10px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8071191263f8938b37af2edcabeef805d7d36158
 .status {
     background-color: red;
     font-size: 16px;
@@ -192,7 +204,10 @@ File: Custom Css File
     color: white;
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8071191263f8938b37af2edcabeef805d7d36158
 @media (max-width: 768px) {
     .campaign-item {
         flex-direction: column;

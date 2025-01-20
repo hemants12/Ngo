@@ -1,4 +1,4 @@
-<?php
+ <?php
 include('Config.php');
 session_start();
 
