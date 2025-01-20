@@ -1,3 +1,15 @@
+<?php include 'layouts/session.php'; ?>
+<?php include 'layouts/main.php'; ?>
+<head>
+    <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'New Donation')); ?>
+    <?php include 'layouts/head-css.php'; ?>   
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <style>
 <?php
 include('config.php');
 
@@ -65,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
+</head>
+<body>
 <div class="main-content">
     <!-- Display total donation amount for today -->
     <div class="alert alert-info">
@@ -172,16 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tbody>
     </table>
 </div>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Form</title>
-</head>
-<body>
     <!-- Form to submit expense details -->
     <form action="" method="POST">
         <label for="expense_type">Expense Type:</label>
@@ -192,8 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+
 
 <script>    
     $(document).ready(function() {
@@ -220,3 +222,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     });
 </script>
+</body>
+</html>
