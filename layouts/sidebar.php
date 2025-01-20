@@ -101,7 +101,8 @@
 <li class="nav-item">
     <a class="nav-link menu-link" href="#sidebaremployee" data-bs-toggle="collapse" role="button"
         aria-expanded="false" aria-controls="sidebaremployee">
-        <i class="fas fa-tasks"></i>
+        <i class="fas fa-user-tie"></i>
+
 
 
 

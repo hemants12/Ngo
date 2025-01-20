@@ -286,8 +286,7 @@
                                             <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
                                             <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
                                             
-                                            <p><strong>
-                                            <p><strong>
+                            
     <?php 
     // Fetching target goal and cam_amount from the database
     $targetGoal = (float) $row['target_goal']; // Cast to float
@@ -305,6 +304,8 @@
 </strong><br>Complete</p>
 
 
+
+
                                             <?php
                                             $endDate = $row['end_date'];
                                             $endDateTime = new DateTime($endDate);
@@ -318,6 +319,7 @@
                                                 echo "Expired " . $interval->days . " days ago</p>";
                                             }
                                             ?>
+                                         
                                         </div>
                                         <?php
                                     }
@@ -337,7 +339,7 @@
 
 
 
-
+                            </div>
                                    <!--- Yeh Inactive Hai --->
 <div class="tab-content text-muted">
     <div class="tab-pane" id="inactive" role="tabpanel">
