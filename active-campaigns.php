@@ -249,6 +249,8 @@
 
 
 
+
+
                                     <!--- Yeh Active Hai --->
                                     
                                     <div class="tab-content text-muted">
@@ -258,10 +260,14 @@
         $updateExpiredCampaigns = "UPDATE campaigns SET status = 'inactive' WHERE end_date < CURDATE() AND status = 'active'";
         $link->query($updateExpiredCampaigns);
 
+        // Update campaigns to 'complete' if cam_amount >= target_goal
+        $updateCompletedCampaigns = "UPDATE campaigns SET status = 'complete' WHERE cam_amount >= target_goal AND status != 'complete'";
+        $link->query($updateCompletedCampaigns);
+
         // Default to 'active' status if no filter is selected
         $filterType = isset($_POST['filter']) ? $_POST['filter'] : 'active';
 
-        // Query to count the campaigns based on the selected filter (active/inactive)
+        // Query to count the campaigns based on the selected filter (active/inactive/complete)
         $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE status = '$filterType'";
         $result_count = $link->query($sql_count);
         $row_count = $result_count->fetch_assoc();
@@ -286,7 +292,7 @@
                         </div>
                         <div class="campaign-details">
                             <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
-                            <p><?php echo htmlspecialchars($row['type']); ?></p> 
+                            <p><?php echo htmlspecialchars(ucfirst($row['type'])); ?></p> 
                         </div>
                         <div class="status"><?php echo $row['status']; ?></div>
                     </div>
@@ -337,6 +343,14 @@
 
 
 
+
+
+
+
+
+
+
+
       <!--- Yeh Inactive Hai --->
 
 
@@ -372,15 +386,16 @@
                     </div>
                     <div class="campaign-details">
                         <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
-                        <p><?php echo htmlspecialchars($row['type']); ?></p> 
+                        <p><?php echo htmlspecialchars(ucfirst($row['type'])); ?></p> 
                     </div>
 
                     <!-- <div class="status"><?php echo $row['status']; ?></div> -->
 
                     <div class="status">
                         <!-- Link to the edit page, passing campaign ID as a query parameter -->
-                        <a href="edit_campaign.php?id=<?php echo $row['id']; ?>" class="edit-link">
+                        <a href="edit_campaign.php?id=<?php echo $row['id']; ?>" class="status">
                             <?php echo htmlspecialchars($row['status']); ?>
+                            
                         </a>
                     </div>
                 </div>
@@ -423,10 +438,6 @@
         ?> 
     </div>
 
-
-
-    
-
     </div>
 </div>
 
@@ -439,8 +450,8 @@
     <div class="tab-pane" id="complete" role="tabpanel">
 
     <?php 
-        // Query to count the campaigns where target_goal = cam_amount
-        $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE target_goal = cam_amount";
+        // Query to count the campaigns where cam_amount >= target_goal
+        $sql_count = "SELECT COUNT(*) AS campaign_count FROM campaigns WHERE cam_amount >= target_goal";
         $result_count = $link->query($sql_count);
         $row_count = $result_count->fetch_assoc();
         $campaignCount = $row_count['campaign_count'];
@@ -451,8 +462,8 @@
     </div>
     <div class="campaign-list" id="campaign-list-container">
         <?php
-        // Query to fetch campaigns where target_goal = cam_amount
-        $sql = "SELECT * FROM campaigns WHERE target_goal = cam_amount";
+        // Query to fetch campaigns where cam_amount >= target_goal
+        $sql = "SELECT * FROM campaigns WHERE cam_amount >= target_goal";
         $result = $link->query($sql);
 
         if ($result->num_rows > 0) {
@@ -464,26 +475,27 @@
                     </div>
                     <div class="campaign-details">
                         <h4><?php echo htmlspecialchars($row['name']); ?></h4> 
-                        <p><?php echo htmlspecialchars($row['type']); ?></p> 
+                        <p><?php echo htmlspecialchars(ucfirst($row['type'])); ?></p> 
                     </div>
-                    <div class="status"><?php echo $row['status']; ?></div>
+                    <div class="status"><?php echo htmlspecialchars($row['status']); ?></div>
                 </div>
                 <div class="metrics">
                     <p><strong><?php echo htmlspecialchars($row['start_date']) ?></strong><br>Campaign Start</p>  
-                    <p><strong><?php echo htmlspecialchars($row['target_goal']) ?></strong><br>Target Goal</p>   
+                    <p><strong><?php echo htmlspecialchars($row['target_goal']); ?></strong><br>Target Goal</p>   
+                    <p><strong><?php echo htmlspecialchars($row['cam_amount']); ?></strong><br>Amount Received</p>   
                     <p><strong>
-    <?php 
-    $targetGoal = (float) $row['target_goal']; // Cast to float
-    $camAmount = (float) $row['cam_amount']; // Cast to float
-    
-    $percentageComplete = 0;
-    if ($targetGoal > 0) {
-        $percentageComplete = ($camAmount / $targetGoal) * 100;
-    }
-    
-    echo number_format($percentageComplete, 2) . "%"; 
-    ?>
-</strong><br>Complete</p> 
+                        <?php 
+                        $targetGoal = (float) $row['target_goal']; // Cast to float
+                        $camAmount = (float) $row['cam_amount']; // Cast to float
+                        
+                        $percentageComplete = 0;
+                        if ($targetGoal > 0) {
+                            $percentageComplete = ($camAmount / $targetGoal) * 100;
+                        }
+                        
+                        echo number_format($percentageComplete, 2) . "%"; 
+                        ?>
+                    </strong><br>Complete</p> 
 
                     <?php
                     $endDate = $row['end_date'];
@@ -502,14 +514,13 @@
                 <?php
             }
         } else {
-            echo "<p>No campaigns found with matching target goal and cam amount.</p>";
+            echo "<p>No campaigns found with matching or exceeding target goal and cam amount.</p>";
         }
         ?> 
     </div>
 
     </div>
 </div>
-
 
 
 
