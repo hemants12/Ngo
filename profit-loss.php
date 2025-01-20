@@ -26,6 +26,7 @@
                 <div class="d-flex flex-column">
                     <div class="row h-100">
                         <div class="card">
+                            
                         </div>
                     </div>
                 </div>
