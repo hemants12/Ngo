@@ -513,7 +513,7 @@ function filterCampaigns(filterType) {
             
             // Update the active tab style
             $('.tabs ul li').removeClass('active');
-            $('.tabs ul li').each(function() {
+            $('.tabs ul li').each(function() {  
                 if ($(this).text().toLowerCase() === filterType) {
                     $(this).addClass('active');
                 }
