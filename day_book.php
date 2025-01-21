@@ -115,25 +115,25 @@
 
     // Fetch data from the database
     $query = "SELECT `expense_id`, `expense_type`, `total_amount`, `expense_amount`, `date` 
-          FROM `tbl_expense` 
-          WHERE `date` = CURDATE()";
-    $result = mysqli_query($link, $query);
+    FROM `tbl_expense` 
+    WHERE `date` = CURDATE()";
+$result = mysqli_query($link, $query);
 
-    if ($result && $result->num_rows > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
+if ($result && $result->num_rows > 0) {
+while ($row = mysqli_fetch_assoc($result)) {
+  $total_amount = $row['total_amount'];
+  $expense_amount = $row['expense_amount'];
+  $remaining_amount = $total_amount - $expense_amount;
 
-            $total_amount = $row['total_amount'];
-            $expense_amount = $row['expense_amount'];
-            $remaining_amount = $total_amount - $expense_amount;
+  // Determine the icon and status message
+}
+} else {
+echo '<p>No records found for today.</p>';
+}
 
-            // Determine the icon and status message
+// Close connection after all queries are executed
 
-        }
-    } else {
-        echo '<p>No records found for today.</p>';
-    }
 
-    mysqli_close($link);
 
 
 
