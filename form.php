@@ -22,10 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               VALUES ('$donorType', '$fullName', '$email', '$phone', '$country', '$areaStreet', '$state', '$city', '$pincode', '$idProof', '$donationAmount', '$donationType', '$donationFor')";
 
     if (mysqli_query($link, $query)) {
-        
+
         echo json_encode(['status' => 'success', 'message' => 'Donation successfully recorded.']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to record donation.']);
     }
 }
-?>

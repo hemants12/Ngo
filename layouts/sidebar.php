@@ -175,7 +175,7 @@
                 <a href="custom-reports.php" class="nav-link" data-key="t-custom-reports">Custom Reports</a>
             </li>
             <li class="nav-item">
-                <a href="donation-reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
+                <a href="donation_reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
             </li>
             <li class="nav-item">
                 <a href="campaign-reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>

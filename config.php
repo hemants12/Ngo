@@ -1,6 +1,5 @@
 <?php
-/* Database credentials. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
+
 
 // Check if DB_SERVER is already defined before defining it
 if (!defined('DB_SERVER')) {
@@ -16,12 +15,10 @@ $dbname     = 'Db_Login';
 $link = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
-if($link === false){
+if ($link === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
 $gmailid = ''; // YOUR gmail email
 $gmailpassword = ''; // YOUR gmail App password
 $gmailusername = ''; // YOUR gmail Username
-
-?>
