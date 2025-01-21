@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   VALUES ('$membership_type', '$amount', '$method', '$name', '$email', '$phonenumber', '$start_date', '$end_date', '$address', '$description')";
 
         if (mysqli_query($link, $query)) {
-            $_SESSION['success'] = "Your donation has been successfully submitted.";
+            $_SESSION['success'] = "Your Membership has been successfully Added.";
             header("Location: " . $_SERVER["PHP_SELF"]);
             exit;
         } else {
