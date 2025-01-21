@@ -24,8 +24,8 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Donation Trends by Month 2025</h4>
-                                    <p class="text-muted">Monthly Donation Amount</p>
+                                    <h4 class="card-title">Campaign Trends by Month 2025</h4>
+                                    <p class="text-muted">Monthly Campaign Amount</p>
                                 </div>
                                 <div class="card-body">
                                     <div id="cam_amountChart"></div>
@@ -37,8 +37,8 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Donor Trends by Month 2025</h4>
-                                    <p class="text-muted">Monthly Number of Donors</p>
+                                    <h4 class="card-title">Campaign Trends by Month 2025</h4>
+                                    <p class="text-muted">Monthly Number of Campaign</p>
                                 </div>
                                 <div class="card-body">
                                     <div id="donorCountChart"></div>
@@ -94,7 +94,7 @@ $donorCounts_js = json_encode($donorCounts);
 ?>
 
 <script>
-    // Donation Amount Chart Data
+    // Campaign Amount Chart Data
     const months1 = <?php echo $months1_js; ?>;
     const donations = <?php echo $donations_js; ?>;
 
@@ -104,7 +104,7 @@ $donorCounts_js = json_encode($donorCounts);
             height: 350,
         },
         series: [{
-            name: 'Donation Amount',
+            name: 'Campaign Amount',
             data: donations
         }],
         xaxis: {
@@ -123,7 +123,7 @@ $donorCounts_js = json_encode($donorCounts);
         colors: ['#556ee6'],
     };
 
-    // Render Donation Amount Chart
+    // Render Campaign Amount Chart
     const chart1 = new ApexCharts(document.querySelector("#cam_amountChart"), options1);
     chart1.render();
 

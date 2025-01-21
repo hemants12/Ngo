@@ -172,7 +172,7 @@
     <div class="collapse menu-dropdown" id="sidebarReports">
         <ul class="nav nav-sm flex-column">
             <li class="nav-item">
-                <a href="custom-reports.php" class="nav-link" data-key="t-custom-reports">Custom Reports</a>
+                <a href="expense_reports.php" class="nav-link" data-key="t-custom-reports">Expense Reports</a>
             </li>
             <li class="nav-item">
                 <a href="donation_reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
