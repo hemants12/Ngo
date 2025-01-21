@@ -111,8 +111,8 @@
 
 
 
-
-
+    include('config.php');
+    
     // Fetch data from the database
     $query = "SELECT `expense_id`, `expense_type`, `total_amount`, `expense_amount`, `date` 
     FROM `tbl_expense` 
