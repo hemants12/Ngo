@@ -60,8 +60,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 // Convert PHP arrays to JavaScript
 $months_js = json_encode($months);
 $donations_js = json_encode($donations);
-// print_r($months_js); die();
-// print_r($donations_js); die();
 ?>
 
 <script>
@@ -72,6 +70,8 @@ $donations_js = json_encode($donations);
     // Chart options
     const options = {
         chart: {
+
+            
             type: 'line',
             height: 350,
         },

@@ -178,7 +178,7 @@
                 <a href="donation_reports.php" class="nav-link" data-key="t-donation-reports">Donation Reports</a>
             </li>
             <li class="nav-item">
-                <a href="campaign-reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>
+                <a href="campaign_reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>
             </li>
             <li class="nav-item">
                 <a href="financial-reports.php" class="nav-link" data-key="t-financial-reports">Financial Reports</a>
