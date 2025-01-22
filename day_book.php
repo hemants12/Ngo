@@ -114,12 +114,11 @@
     include('config.php');
 
     // Fetch data from the database
-<<<<<<< HEAD
+
     $query = "SELECT `expense_id`, `expense_type`, `total_amount`, `expense_amount`, `date` 
     FROM `tbl_expense` 
     WHERE `date` = CURDATE()";
     $result = mysqli_query($link, $query);
-=======
     $query = "SELECT expense_id, expense_type, total_amount, expense_amount, date 
     FROM tbl_expense 
     WHERE date = CURDATE()";
@@ -141,7 +140,6 @@ echo '<p>No records found for today.</p>';
 
 
 
->>>>>>> d8dbb154685dd1b7c5b3ae6a5118a3ad9123ec8e
 
     if ($result && $result->num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {

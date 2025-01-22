@@ -149,8 +149,6 @@
 
    
     <div class="row">
-    <!-- First Column with 2 Cards -->
-    <div class="col-xl-6">
         <!-- First Card in First Column -->
         <div class="col-xl-3 col-md-6">
             <div class="card card-animate donation-card">
@@ -196,7 +194,6 @@
                 </div>
             </div>
         </div>
-    </div><!-- end first column -->
 
     <!-- Second Column -->
     <div class="col-xl-6">
