@@ -1,5 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
+
 <?php
 include('config.php');
 
@@ -178,6 +179,69 @@ if ($result->num_rows > 0) {
     $platinumCount = $row['platinum_count'];
 } else {
     $silverCount = $goldCount = $platinumCount = 0;
+}
+
+
+
+
+
+
+$currentMonth = date('m');
+$currentYear = date('Y');
+
+// Query to fetch total donation amount for the current month
+$donationQuery = "
+    SELECT SUM(donationAmount) AS total_donations
+    FROM donations
+    WHERE MONTH(created_at) = $currentMonth AND YEAR(created_at) = $currentYear";
+$donationResult = $link->query($donationQuery);
+$donationRow = $donationResult->fetch_assoc();
+$totalDonations = $donationRow['total_donations'] ? $donationRow['total_donations'] : 0;
+
+
+// Query to fetch total membership amount for the current month
+$membershipQuery = "
+    SELECT SUM(amount) AS total_memberships
+    FROM memberships
+    WHERE MONTH(start_date) = $currentMonth AND YEAR(start_date) = $currentYear";
+$membershipResult = $link->query($membershipQuery);
+$membershipRow = $membershipResult->fetch_assoc();
+$totalMemberships = $membershipRow['total_memberships'] ? $membershipRow['total_memberships'] : 0;
+
+// Query to fetch total campaign amount for the current month
+$campaignQuery = "
+    SELECT SUM(cam_amount) AS total_campaigns
+    FROM campaigns
+    WHERE MONTH(created_at) = $currentMonth AND YEAR(created_at) = $currentYear";
+$campaignResult = $link->query($campaignQuery);
+$campaignRow = $campaignResult->fetch_assoc();
+$totalCampaigns = $campaignRow['total_campaigns'] ? $campaignRow['total_campaigns'] : 0;
+
+
+// Calculate the total amount
+$totalAmount = $totalDonations + $totalMemberships + $totalCampaigns;
+
+
+
+
+
+
+
+$currentMonth = date('m');
+$currentYear = date('Y');
+
+// Query to fetch total expenses for the current month
+$expenseQuery = "
+    SELECT SUM(expense_amount) AS total_expenses
+    FROM tbl_expense
+    WHERE MONTH(date) = $currentMonth AND YEAR(date) = $currentYear";
+$expenseResult = $link->query($expenseQuery);
+
+if ($expenseResult->num_rows > 0) {
+    $expenseRow = $expenseResult->fetch_assoc();
+    $totalExpenses = $expenseRow['total_expenses'] ? $expenseRow['total_expenses'] : 0;
+} else {
+    $totalExpenses = 0;
 }
 
 ?>
@@ -432,14 +496,14 @@ if ($result->num_rows > 0) {
                                                 <div class="col-6">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">Income</p>
-                                                        <h5 class="mb-0 text-primary">₹ 80,000</h5> <!-- Dummy value -->
+                                                        <h5 class="mb-0 text-primary">₹<?php echo number_format($totalAmount); ?></h5> <!-- Dummy value -->
                                                     </div>
                                                 </div>
                                                 <!-- Expenses Section -->
                                                 <div class="col-6">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">Expenses</p>
-                                                        <h5 class="mb-0 text-danger">₹ 30,000</h5> <!-- Dummy value -->
+                                                        <h5 class="mb-0 text-danger">₹ <?php echo number_format($totalExpenses); ?></h5> <!-- Dummy value -->
                                                     </div>
                                                 </div>
                                             </div>
