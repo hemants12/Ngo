@@ -112,31 +112,24 @@
 
 
     include('config.php');
-    
+
     // Fetch data from the database
     $query = "SELECT `expense_id`, `expense_type`, `total_amount`, `expense_amount`, `date` 
     FROM `tbl_expense` 
     WHERE `date` = CURDATE()";
-$result = mysqli_query($link, $query);
+    $result = mysqli_query($link, $query);
 
-if ($result && $result->num_rows > 0) {
-while ($row = mysqli_fetch_assoc($result)) {
-  $total_amount = $row['total_amount'];
-  $expense_amount = $row['expense_amount'];
-  $remaining_amount = $total_amount - $expense_amount;
+    if ($result && $result->num_rows > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $total_amount = $row['total_amount'];
+            $expense_amount = $row['expense_amount'];
+            $remaining_amount = $total_amount - $expense_amount;
 
-  // Determine the icon and status message
-}
-} else {
-echo '<p>No records found for today.</p>';
-}
-
-// Close connection after all queries are executed
-
-
-
-
-
+            // Determine the icon and status message
+        }
+    } else {
+        echo '<p>No records found for today.</p>';
+    }
     ?>
     <script>
         $(document).ready(function() {
@@ -148,7 +141,6 @@ echo '<p>No records found for today.</p>';
                     fetchTotalAmount(selectedDate);
                 }
             });
-
             function fetchTotalAmount(date) {
                 $.ajax({
                     url: "fetch_total_amount.php",
@@ -167,7 +159,6 @@ echo '<p>No records found for today.</p>';
         });
     </script>
 </head>
-
 <body>
     <div id="layout-wrapper">
         <?php include 'layouts/menu.php'; ?>
@@ -184,12 +175,9 @@ echo '<p>No records found for today.</p>';
                                     <input type="text" id="datePicker" placeholder="Select Date" class="form-control"
                                         style="width: 150px;">
                                 </div>
-
                             </div>
                             <div class="row">
-
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
@@ -209,12 +197,10 @@ echo '<p>No records found for today.</p>';
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
-
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
@@ -228,21 +214,18 @@ echo '<p>No records found for today.</p>';
                                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
                                                         <?php echo number_format($totalAmount2); ?>
                                                     </h4>
-
                                                 </div>
-
                                                 <div class="avatar-sm flex-shrink-0">
                                                     <span class="avatar-title bg-info-subtle rounded fs-3">
                                                         <i class="fas fa-tasks text-info"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
@@ -253,7 +236,7 @@ echo '<p>No records found for today.</p>';
                                             </div>
                                             <div class="d-flex align-items-end justify-content-between mt-4">
                                                 <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹<?php echo number_format($totalAmount,); ?>0
+                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹<?php echo number_format($totalAmount); ?>
                                                     </h4>
                                                 </div>
                                                 <div class="avatar-sm flex-shrink-0">
@@ -262,12 +245,11 @@ echo '<p>No records found for today.</p>';
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
@@ -282,16 +264,19 @@ echo '<p>No records found for today.</p>';
                                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                                         ₹
                                                         <?php
-                                                        if ($remaining_amount >= 0) {
+                                                        if (isset($remaining_amount) && $remaining_amount >= 0) {
                                                             $icon = '<span style="color: green;">+</span>';
                                                             $status_message = " $remaining_amount";
-                                                        } else {
+                                                        } elseif (isset($remaining_amount)) {
                                                             $icon = '<span style="color: red;">-</span>';
                                                             $status_message = " " . abs($remaining_amount);
+                                                        } else {
+                                                            $icon = '<span style="color: gray;">?</span>';
+                                                            $status_message = " Not available";
                                                         }
 
-                                                        // Display the icon and message
                                                         echo $icon . ' ' . $status_message;
+
                                                         ?>
                                                     </h4>
                                                     <a href="" class="text-decoration-underline"></a>
