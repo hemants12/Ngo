@@ -79,18 +79,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="page-content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-xxl-3">
-                                <div class="card mt-1">
-                                    <div class="card-body m-4">
-                                        <div class="text-center">
-                                            <div class="profile-user position-relative d-inline-block mx-auto mb-4">
-                                                <img src="assets/images/users/download.png" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
+                            <div class="col-xxl-3">   
+                               <div class="card mt-1">
+                                <div class="card-body m-4">
+                                    <div class="text-center">
+                                        <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
+                                            <img src="assets/images/users/download.png" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
+                                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                                                <input id="profile-img-file-input" type="file" class="profile-img-file-input">
+                                                <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                                    <span class="avatar-title rounded-circle bg-light text-body material-shadow">
+                                                        <i class="ri-camera-fill"></i>
+                                                    </span>
+                                                </label>
                                             </div>
-                                            <h5 class="fs-16 mb-1"><?php echo $user['username'] ?? 'Guest'; ?></h5>
-                                            <p class="text-muted mb-0">Ngo King Software</p>
                                         </div>
+                                        
+                                        <h5 class="fs-16 mb-1"><?php echo $user['username'] ?? 'Guest'; ?></h5>
+                                        <p class="text-muted mb-0">Ngo King Software</p>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             <div class="col-xxl-9">
                                 <div class="card mt-xxl-n5">

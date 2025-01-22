@@ -34,9 +34,8 @@
     <div class="row align-items-end">
     <div class="col-sm-8">
     <div class="p-4">
-    <p class="fs-16 lh-base">Your free trial expired in <span class="fw-semibold">17  days.</span> <i class="mdi mdi-arrow-right"></i></p>
-    <div class="mt-3"><a href="pages-pricing.php"class="btn btn-success">Upgrade Account!</a>
-    </div>
+    <p class="fs-16 lh-base">Your free trial expired in <span class="fw-semibold">17 days.</span> <i class="mdi mdi-arrow-right"></i></p>
+    <div class="mt-3"><a href="pages-pricing.php"class="btn btn-success">Upgrade Account!</a></div>
     </div>
     </div>
     <div class="col-sm-4">
@@ -51,78 +50,214 @@
     </div> <!-- end col-->
     </div> <!-- end row-->
 
-    <!-- Total Donations Section -->
-    <div class="row" style="margin-top:30px;">
-        <div class="col-md-3">
-            <div class="card donation-card">
+    <!-- Donation Cards Section -->
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
                 <div class="card-body">
-                    <h5 class="card-title">Daily Donations</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$500</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Today Donation <br>Collection</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 100</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-success-subtle rounded fs-3">
+                                <i class="fas fa-donate text-success"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card donation-card">
+
+        <!-- Card 2 -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
                 <div class="card-body">
-                    <h5 class="card-title">Monthly Donations</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$3,500</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Week's <br>Donations</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 500</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                <i class="fas fa-hand-holding-usd text-warning"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card donation-card">
+
+        <!-- Card 3 -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
                 <div class="card-body">
-                    <h5 class="card-title">Yearly Donations</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$12,000</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month's <br>Donations</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 2,000</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                <i class="fas fa-coins text-info"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card donation-card">
+
+        <!-- Card 4 -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
                 <div class="card-body">
-                    <h5 class="card-title">Total Donations</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$150,000</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Yearly <br>Donations</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 10,000</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-danger-subtle rounded fs-3">
+                                <i class="fas fa-wallet text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End Total Donations Section -->
-    <!-- Table Dark -->
-<!-- <table class="table table-striped table-nowrap">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Date</th>
-            <th scope="col">Invoice</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Bobby Davis</td>
-            <td>Nov 14, 2021</td>
-            <td>$2,410</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Christopher Neal</td>
-            <td>Nov 21, 2021</td>
-            <td>$1,450</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Monkey Karry</td>
-            <td>Nov 24, 2021</td>
-            <td>$3,500</td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Aaron James</td>
-            <td>Nov 25, 2021</td>
-            <td>$6,875</td>
-        </tr>
-    </tbody>
-</table> -->
+    </div><!-- end row -->
+    
+    
+
+   
+    <div class="row">
+    <!-- First Column with 2 Cards -->
+    <div class="col-xl-6">
+        <!-- First Card in First Column -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Today Donation <br>Collection</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 100</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-success-subtle rounded fs-3">
+                                <i class="fas fa-donate text-success"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Card in First Column -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-animate donation-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Today Donation <br>Collection</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ 100</h4>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-success-subtle rounded fs-3">
+                                <i class="fas fa-donate text-success"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end first column -->
+
+    <!-- Second Column -->
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Profit & Loss Summary</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="row">
+                    <!-- Income Section -->
+                    <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-0">Income</p>
+                            <h5 class="mb-0 text-primary">₹ 80,000</h5> <!-- Dummy value -->
+                        </div>
+                    </div>
+                    <!-- Expenses Section -->
+                    <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-0">Expenses</p>
+                            <h5 class="mb-0 text-danger">₹ 30,000</h5> <!-- Dummy value -->
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-0">Net Profit/Loss</p>
+                    <h5 class="mb-0 text-success">₹ 50,000</h5> <!-- Dummy value (Income - Expenses) -->
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end second column -->
+</div><!-- end row -->
+
+
+<!-- Add the following CSS for styling -->
+<style>
+    .text-success {
+        color: #28a745 !important;
+    }
+    .text-danger {
+        color: #dc3545 !important;
+    }
+    .text-primary {
+        color: #007bff !important;
+    }
+    .text-info {
+        color: #17a2b8 !important;
+    }
+    .text-warning {
+        color: #ffc107 !important;
+    }
+</style>
+
+
+
+
+
+
+
+
     </div><!-- container-fluid -->
     </div><!-- End Page-content -->
     </div><!-- end main content-->
