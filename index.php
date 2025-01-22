@@ -35,20 +35,46 @@ $totalAmount2 = mysqli_fetch_assoc($res2)['total'] ?: 0;
 
 $weekTotal = $totalAmount + $totalAmount1 + $totalAmount2;
 
+
 // Calculate Last 1 Month total
-$query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+$currentMonth = date('m'); // Current month (01-12)
+$currentYear = date('Y');  // Current year (e.g., 2025)
+
+// Query to fetch total donation amount for the current month
+$query = "
+    SELECT SUM(donationAmount) AS total 
+    FROM donations 
+    WHERE MONTH(created_at) = $currentMonth AND YEAR(created_at) = $currentYear";
 $res = mysqli_query($link, $query);
 $totalAmount = mysqli_fetch_assoc($res)['total'] ?: 0;
 
-$query1 = "SELECT SUM(amount) AS total FROM memberships WHERE DATE(start_date) >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+// Query to fetch total membership amount for the current month
+$query1 = "
+    SELECT SUM(amount) AS total 
+    FROM memberships 
+    WHERE MONTH(start_date) = $currentMonth AND YEAR(start_date) = $currentYear";
 $res1 = mysqli_query($link, $query1);
 $totalAmount1 = mysqli_fetch_assoc($res1)['total'] ?: 0;
 
-$query2 = "SELECT SUM(cam_amount) AS total FROM campaigns WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+// Query to fetch total campaign amount for the current month
+$query2 = "
+    SELECT SUM(cam_amount) AS total 
+    FROM campaigns 
+    WHERE MONTH(created_at) = $currentMonth AND YEAR(created_at) = $currentYear";
 $res2 = mysqli_query($link, $query2);
 $totalAmount2 = mysqli_fetch_assoc($res2)['total'] ?: 0;
 
+// Calculate total amount for the current month
 $monthTotal = $totalAmount + $totalAmount1 + $totalAmount2;
+
+// Display the total for the current month
+
+
+
+
+
+
+
 
 // Calculate Last 1 Year total
 $query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
@@ -65,81 +91,6 @@ $totalAmount2 = mysqli_fetch_assoc($res2)['total'] ?: 0;
 
 $yearTotal = $totalAmount + $totalAmount1 + $totalAmount2;
 
-// Display the totals
-
-// echo "<h3>Donations Summary</h3>";
-// echo "Today's Donations: ₹" . number_format($todayTotal, 2) . "<br>";
-// echo "This Week's Donations: ₹" . number_format($weekTotal, 2) . "<br>";
-// echo "This Month's Donations: ₹" . number_format($monthTotal, 2) . "<br>";
-// echo "This Year's Donations: ₹" . number_format($yearTotal, 2) . "<br>";
-
-
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect form data
-    $expense_type = mysqli_real_escape_string($link, $_POST['expenseReason']);
-    $expense_amount = mysqli_real_escape_string($link, $_POST['expenseAmount']);
-    $date = date('Y-m-d');
-
-    // Calculate the total amount (already fetched in the main page)
-    $query_total = "SELECT 
-            (SELECT IFNULL(SUM(donationAmount), 0) FROM donations WHERE DATE(created_at) = CURDATE()) +
-            (SELECT IFNULL(SUM(amount), 0) FROM memberships WHERE DATE(start_date) = CURDATE()) +
-            (SELECT IFNULL(SUM(cam_amount), 0) FROM campaigns WHERE DATE(created_at) = CURDATE()) 
-            AS total";
-    $result = mysqli_query($link, $query_total);
-    $row = mysqli_fetch_assoc($result);
-    $total_collected_today = $row['total'];
-
-    // Check if an entry for today's date exists
-    $checkQuery = "SELECT expense_type, expense_amount FROM tbl_expense WHERE date = ?";
-    $checkStmt = $link->prepare($checkQuery);
-    $checkStmt->bind_param("s", $date);
-    $checkStmt->execute();
-    $checkResult = $checkStmt->get_result();
-
-    if ($checkResult->num_rows > 0) {
-        // If entry exists, update the record
-        $existingData = $checkResult->fetch_assoc();
-        $existingExpenseType = $existingData['expense_type'];
-        $existingExpenseAmount = $existingData['expense_amount'];
-
-        // Append new expense type to the existing one
-        $updatedExpenseType = $existingExpenseType . ', ' . $expense_type;
-
-        // Update the record
-        $updateQuery = "UPDATE tbl_expense SET 
-                expense_type = ?, 
-                total_amount = ?, 
-                expense_amount = expense_amount + ? 
-                WHERE date = ?";
-        $updateStmt = $link->prepare($updateQuery);
-        $updateStmt->bind_param("sdds", $updatedExpenseType, $total_collected_today, $expense_amount, $date);
-
-        if ($updateStmt->execute()) {
-            $_SESSION['success'] = "Your expense has been successfully updated.";
-        } else {
-            echo "Error: " . $updateStmt->error;
-        }
-        $updateStmt->close();
-    } else {
-        // If no entry exists, insert a new record
-        $insertQuery = $link->prepare("INSERT INTO tbl_expense (expense_type, total_amount, expense_amount, date) VALUES (?, ?, ?, ?)");
-        $insertQuery->bind_param("sdds", $expense_type, $total_collected_today, $expense_amount, $date);
-        if ($insertQuery->execute()) {
-            $_SESSION['success'] = "Your expense has been successfully submitted.";
-        } else {
-            echo "Error: " . $insertQuery->error;
-        }
-        $insertQuery->close();
-    }
-
-    // Clean up
-    $checkStmt->close();
-    mysqli_close($link);
-}
 
 
 
@@ -219,7 +170,7 @@ $totalCampaigns = $campaignRow['total_campaigns'] ? $campaignRow['total_campaign
 
 
 // Calculate the total amount
-$totalAmount = $totalDonations + $totalMemberships + $totalCampaigns;
+$totalAmountincome = $totalDonations + $totalMemberships + $totalCampaigns;
 
 
 
@@ -244,6 +195,9 @@ if ($expenseResult->num_rows > 0) {
     $totalExpenses = 0;
 }
 
+
+
+$remainingBalance = $totalAmountincome - $totalExpenses;
 ?>
 <script>
     $(document).ready(function() {
@@ -467,18 +421,25 @@ if ($expenseResult->num_rows > 0) {
                                                      
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-end justify-content-between mt-1">
-                                                    <div>
-                                                        <h4 class="fs-16 fw-semibold ff-secondary "> Silver <span class="d-flex align-items-end" > <?php echo $silverCount; ?></span></h4>
-                                                        <h4 class="fs-16 fw-semibold ff-secondary "> Gold<?php echo $goldCount; ?></h4>
-                                                        <h4 class="fs-16 fw-semibold ff-secondary "> Platinum<?php echo $platinumCount; ?></h4>
-                                                    </div>
-                                                    <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                            <i class="fas fa-donate text-success"></i>
-                                                        </span>
-                                                    </div>
+                                                <div class="align-items-end justify-content-between mt-1">
+                                            <div>
+                                                <div class="d-flex justify-content-between">
+                                                    <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
+                                                    <h4 class="fs-16 fw-semibold ff-secondary">
+                                                        <?php echo $silverCount; ?></h4>
                                                 </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
+                                                    <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
+                                                    </h4>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
+                                                    <h4 class="fs-16 fw-semibold ff-secondary">
+                                                        <?php echo $platinumCount; ?></h4>
+                                                </div>
+                                            </div>
+                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -496,7 +457,7 @@ if ($expenseResult->num_rows > 0) {
                                                 <div class="col-6">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">Income</p>
-                                                        <h5 class="mb-0 text-primary">₹<?php echo number_format($totalAmount); ?></h5> <!-- Dummy value -->
+                                                        <h5 class="mb-0 text-primary">₹<?php echo number_format($totalAmountincome); ?></h5> <!-- Dummy value -->
                                                     </div>
                                                 </div>
                                                 <!-- Expenses Section -->
@@ -510,7 +471,7 @@ if ($expenseResult->num_rows > 0) {
                                             <hr>
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-0">Net Profit/Loss</p>
-                                                <h5 class="mb-0 text-success">₹ 50,000</h5> <!-- Dummy value (Income - Expenses) -->
+                                                <h5 class="mb-0 text-success">₹  <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
