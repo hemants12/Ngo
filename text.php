@@ -1,103 +1,128 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+<div class="row">
+    <!-- Top 5 Donors Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Top 5 Donors</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Donor Name</th>
+                                <th>Donation Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example donor data
+                            $topDonors = [
+                                ['name' => 'John Doe', 'amount' => '₹ 5000'],
+                                ['name' => 'Jane Smith', 'amount' => '₹ 4500'],
+                                ['name' => 'Alex Johnson', 'amount' => '₹ 4000'],
+                                ['name' => 'Emily Davis', 'amount' => '₹ 3500'],
+                                ['name' => 'Michael Brown', 'amount' => '₹ 3000']
+                            ];
 
-<head>
-    <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'New Donation')); ?>
-    <?php include 'layouts/head-css.php'; ?>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-        <?php
-        include('config.php');
+                            foreach ($topDonors as $index => $donor) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$donor['name']}</td>
+                                        <td>{$donor['amount']}</td>
+                                      </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
 
-        // Get today's date
-        $currentDate = date('Y-m-d');
+    <!-- Largest and Smallest Donations Section (This Month and This Year) -->
+    <div class="col-xl-6">
+        <div class="row">
+            <!-- This Month's Largest and Smallest Donations -->
+            <div class="col-12 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">This Month's Largest and Smallest Donations</h4>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <?php
+                        // Example data for this month
+                        $largestDonorMonth = ['name' => 'Samuel Green', 'amount' => '₹ 7000'];
+                        $smallestDonorMonth = ['name' => 'Sophia White', 'amount' => '₹ 500'];
+                        ?>
+                        <!-- Largest Donation -->
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-grow-1">
+                                <p class="mb-0">Largest Single Donation</p>
+                                <h5 class="mb-0"><?php echo $largestDonorMonth['name']; ?> - <?php echo $largestDonorMonth['amount']; ?></h5>
+                            </div>
+                            <div class="avatar-sm">
+                                <span class="avatar-title bg-primary-subtle rounded fs-4">
+                                    <i class="fas fa-trophy text-primary"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Smallest Donation -->
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <p class="mb-0">Smallest Donation</p>
+                                <h5 class="mb-0"><?php echo $smallestDonorMonth['name']; ?> - <?php echo $smallestDonorMonth['amount']; ?></h5>
+                            </div>
+                            <div class="avatar-sm">
+                                <span class="avatar-title bg-danger-subtle rounded fs-4">
+                                    <i class="fas fa-heart text-danger"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
 
-        // SQL query to get donations for today
-        $query = "SELECT * FROM donations WHERE DATE(created_at) = CURDATE()";
-        $res = mysqli_query($link, $query);
-
-        // Initialize total amount variable for donations
-        $totalAmount = 0;
-
-        // Fetch the donations and calculate the total amount
-        while ($data = mysqli_fetch_assoc($res)) {
-            $totalAmount += $data['donationAmount'];
-        }
-
-        // SQL query to get memberships for today
-        $query1 = "SELECT * FROM memberships WHERE DATE(start_date) = CURDATE()";
-        $res1 = mysqli_query($link, $query1);
-
-        // Initialize total amount variable for memberships
-        $totalAmount1 = 0;
-
-        // Fetch the memberships and calculate the total amount
-        while ($data1 = mysqli_fetch_assoc($res1)) {
-            $totalAmount1 += $data1['amount'];
-        }
-
-        $query2 = "SELECT * FROM campaigns WHERE DATE(created_at) = CURDATE()";
-        $res2 = mysqli_query($link, $query2);
-        $totalAmount2 = 0;
-        while ($data2 = mysqli_fetch_assoc($res2)) {
-            $totalAmount2 += $data2['cam_amount'];
-        }
-
-
-        $total = $totalAmount + $totalAmount1 + 
-        +1065 
-        ;
-        // insert code 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Get POST data
-            $expense_type = mysqli_real_escape_string($link, $_POST['expense_type']);
-            $expense_amount = mysqli_real_escape_string($link, $_POST['expense_amount']);
-            $date = date('Y-m-d');
-
-            // Prepare the SQL query using a prepared statement to prevent SQL injection
-            $insertQuery = $link->prepare("INSERT INTO tbl_expense (expense_type, expense_amount, date) VALUES (?, ?, ?)");
-            $insertQuery->bind_param("sds", $expense_type, $expense_amount, $date); // 's' for string, 'd' for decimal (float)
-        
-            // Execute the query
-            if ($insertQuery->execute()) {
-                echo "Expense added successfully!";
-            } else {
-                echo "Error: " . $insertQuery->error;
-            }
-
-            // Close the prepared statement
-            $insertQuery->close();
-        }
-
-        ?>
-        </head>
-        <body>
-            <div class="main-content"><!-- Display total donation amount for today -->
-            <div class="alert alert-info"><h4>Total Amount Today: <strong>
-                <?php echo number_format($total, 2); ?> </strong></h4><h4>Total Donations Today: <strong>
-                    <?php echo number_format($totalAmount, 2); ?> </strong></h4></div><!-- Donation Table -->
-                    <table id="reminderTable" class="display"><tbody>
-  
-        </tbody></table></div><!-- Memberships Table --><div class="main-content">
-            <!-- Display total membership amount for today -->
-             <div class="alert alert-info"><h4>Total Membership Amount Today: <strong>
-                <?php echo number_format($totalAmount1, 2); ?> 
-            </strong></h4></div><!-- Memberships Table --><table id="membershipTable" class="display">
-               <tbody>
-     
-        </tbody></table></div><div class="main-content"><!-- Display total membership amount for today -->
-            <div class="alert alert-info"><h4>Total Cam Amount Today: <strong>
-                <?php echo number_format($totalAmount2, 2); ?> </strong></h4>
-</div>
-             <tbody>
-
-    
-        </tbody>
-        </table>
-        </div>
-      </body>
-      </html>
+            <!-- This Year's Largest and Smallest Donations -->
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">This Year's Largest and Smallest Donations</h4>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <?php
+                        // Example data for this year
+                        $largestDonorYear = ['name' => 'William Lee', 'amount' => '₹ 10000'];
+                        $smallestDonorYear = ['name' => 'Ava Brown', 'amount' => '₹ 300'];
+                        ?>
+                        <!-- Largest Donation -->
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-grow-1">
+                                <p class="mb-0">Largest Single Donation</p>
+                                <h5 class="mb-0"><?php echo $largestDonorYear['name']; ?> - <?php echo $largestDonorYear['amount']; ?></h5>
+                            </div>
+                            <div class="avatar-sm">
+                                <span class="avatar-title bg-primary-subtle rounded fs-4">
+                                    <i class="fas fa-trophy text-primary"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Smallest Donation -->
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <p class="mb-0">Smallest Donation</p>
+                                <h5 class="mb-0"><?php echo $smallestDonorYear['name']; ?> - <?php echo $smallestDonorYear['amount']; ?></h5>
+                            </div>
+                            <div class="avatar-sm">
+                                <span class="avatar-title bg-danger-subtle rounded fs-4">
+                                    <i class="fas fa-heart text-danger"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end col -->
+</div><!-- end row -->

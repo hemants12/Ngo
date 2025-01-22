@@ -87,12 +87,13 @@
     </a>
     <div class="collapse menu-dropdown" id="sidebarCampaigns">
         <ul class="nav nav-sm flex-column">
+        <li class="nav-item">
+                <a href="create-campaign.php" class="nav-link" data-key="t-create-campaign">Create Campaign</a>
+            </li>
             <li class="nav-item">
                 <a href="active-campaigns.php" class="nav-link" data-key="t-active-campaigns">Active Campaigns</a>
             </li>
-            <li class="nav-item">
-                <a href="create-campaign.php" class="nav-link" data-key="t-create-campaign">Create Campaign</a>
-            </li>
+           
            
         </ul>
     </div>
@@ -181,32 +182,11 @@
                 <a href="campaign_reports.php" class="nav-link" data-key="t-campaign-reports">Campaign Reports</a>
             </li>
             <li class="nav-item">
-                <a href="financial-reports.php" class="nav-link" data-key="t-financial-reports">Financial Reports</a>
+                <a href="financial_reports.php" class="nav-link" data-key="t-financial-reports">Financial Reports</a>
             </li>
         </ul>
     </div>
-</li>
-<!-- Settings -->
-<li class="nav-item">
-    <a class="nav-link menu-link" href="#sidebarSettings" data-bs-toggle="collapse" role="button"
-        aria-expanded="false" aria-controls="sidebarSettings">
-        <i class="fas fa-cog"></i>
-
-        <span data-key="t-settings">Settings</span>
-    </a>
-    <div class="collapse menu-dropdown" id="sidebarSettings">
-        <ul class="nav nav-sm flex-column">
-           
-            <li class="nav-item">
-                <a href="pages-profile.php" class="nav-link" data-key="t-Profile">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a href="pages-profile-settings.php" class="nav-link" data-key="t-pages-profile-settings">Setting</a>
-            </li>
-          
-        </ul>
-    </div>
-</li>      
+</li>     
             </ul>
         </div>
         <!-- Sidebar -->

@@ -10,6 +10,164 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
+    <style>
+        /* Base styles */
+        .container-fluid {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Tabs styling */
+        .nav-tabs {
+            border-bottom: 2px solid #eee;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs .nav-link {
+            color: #666;
+            border: none;
+            padding: 1rem;
+            margin-right: 1rem;
+            position: relative;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #5865F2;
+            background: none;
+            border: none;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #5865F2;
+        }
+
+        /* Campaign list styling */
+        .campaign-count-section {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .campaign-count {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .campaign-list {
+            padding: 0 1rem;
+        }
+
+        .campaign-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .campaign-tag {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #5865F2;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .campaign-details {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .campaign-details h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .campaign-details p {
+            margin: 0.25rem 0 0;
+            color: #666;
+        }
+
+        .status {
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 0 0 8px 8px;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metrics p {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-fluid {
+                padding: 10px;
+            }
+
+            .campaign-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .campaign-details {
+                margin: 1rem 0;
+            }
+
+            .status {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+       
+        }
+    </style>
 </head>
 <body>
     <div id="layout-wrapper">
@@ -96,7 +254,7 @@
                                                                     <?php echo htmlspecialchars(ucfirst($row['type'])); ?>
                                                                 </p>
                                                             </div>
-                                                            <div class="status">
+                                                            <div class="status" style="background-color:#5865F2; padding:8px; color:white; border-radius:5px;">
                                                                 <?php echo $row['status']; ?>
                                                             </div>
                                                         </div>
@@ -191,10 +349,10 @@
 
                                                             <!-- <div class="status"><?php echo $row['status']; ?></div> -->
 
-                                                            <div class="status">
+                                                            <div class="status"style="background-color:red; padding:8px; color:white; border-radius:5px;">
                                                                 <!-- Link to the edit page, passing campaign ID as a query parameter -->
                                                                 <a href="edit_campaign.php?id=<?php echo $row['id']; ?>"
-                                                                    class="status">
+                                                                    class="status" style="color:white; ">
                                                                     <?php echo htmlspecialchars($row['status']); ?>
 
                                                                 </a>
@@ -282,7 +440,7 @@
                                                                     <?php echo htmlspecialchars(ucfirst($row['type'])); ?>
                                                                 </p>
                                                             </div>
-                                                            <div class="status">
+                                                            <div class="status" style="background-color:green; padding:8px; color:white; border-radius:5px;">
                                                                 <?php echo htmlspecialchars($row['status']); ?>
                                                             </div>
                                                         </div>
