@@ -162,14 +162,6 @@ echo '<p>No records found for today.</p>';
 
 
 
-    
-
-
-
-
-
-
-
     ?>
     <script>
         $(document).ready(function() {

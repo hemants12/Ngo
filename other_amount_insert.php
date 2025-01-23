@@ -1,4 +1,3 @@
-
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
 
@@ -11,23 +10,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-  <?php 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
         $otheramount = $_POST['otheramount'];
-        
+
         include 'config.php';
-        
+
         // Insert data into the table with the current date
         $query = "INSERT INTO other (otheramount, other_date) VALUES ('$otheramount', CURRENT_DATE)";
-        
+
         if (mysqli_query($link, $query)) {
-           $_SESSION['success'] = "Other Amount Insert Successfully";
-           header('Location: day_book.php');
+            $_SESSION['success'] = "Other Amount Insert Successfully";
+            header('Location: day_book.php');
         } else {
             echo "Error: " . mysqli_error($link);
         }
-        
+
         mysqli_close($link);
     }
 
