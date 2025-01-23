@@ -392,10 +392,10 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
 
 
                         <div class="row">
-                            <!-- First Column with 2 Cards -->
+                                <!-- First Column with 2 Cards -->
 
-                            <!-- First Card in First Column -->
-                            <div class="col-xl-3 col-md-6">
+                                <!-- First Card in First Column -->
+                                <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -421,146 +421,347 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                 </div>
                             </div>
 
-                            <!-- Second Card in First Column -->
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card card-animate donation-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1 overflow-hidden">
-                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total
-                                                    Active <br>Member</p>
 
-                                            </div>
-                                        </div>
-                                        <div class="align-items-end justify-content-between mt-1">
-                                            <div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $silverCount; ?></h4>
-                                                </div>
-                                                <div class="align-items-end justify-content-between mt-1">
-                                            <div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $silverCount; ?></h4>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
-                                                    </h4>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $platinumCount; ?></h4>
+                                <!-- Second Card in First Column -->
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card card-animate donation-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Active <br>Member</p>
+
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="align-items-end justify-content-between mt-1">
+                                                <div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">
+                                                            <?php echo $silverCount; ?></h4>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">
+                                                            <?php echo $platinumCount; ?></h4>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                               
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
-                                                    </h4>
+                                </div>
+
+
+                                <!-- Second Column -->
+                                <div class="col-xl-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-0">Profit & Loss Summary</h4>
+                                        </div><!-- end card header -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <!-- Income Section -->
+                                                <div class="col-6">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">Income</p>
+                                                        <h5 class="mb-0 text-primary">₹<?php echo number_format($totalAmountincome); ?></h5> <!-- Dummy value -->
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $platinumCount; ?></h4>
+                                                <!-- Expenses Section -->
+                                                <div class="col-6">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">Expenses</p>
+                                                        <h5 class="mb-0 text-danger">₹ <?php echo number_format($totalExpenses); ?></h5> <!-- Dummy value -->
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-
-                                    </div>
+                                            <hr>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-0">Net Profit/Loss</p>
+                                                <h5 class="mb-0 text-success">₹ <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
+                                            </div>
+                                        </div><!-- end card body -->
+                                    </div><!-- end card -->
+                                </div><!-- end second column -->
+                            </div><!-- end row -->
                                 </div>
                             </div>
 
 
-                            <!-- Second Column -->
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title mb-0">Profit & Loss Summary</h4>
-                                    </div><!-- end card header -->
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <!-- Income Section -->
-                                            <div class="col-6">
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="mb-0">Income</p>
-                                                    <h5 class="mb-0 text-primary">₹ 80,000</h5> <!-- Dummy value -->
+    
+                           
+
+                            <div class="row">
+                                <!-- First Column with 2 Cards -->
+                              
+                                    <!-- First Card in First Column -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Amount Raised <br>By Campaign</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- Expenses Section -->
-                                            <div class="col-6">
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="mb-0">Expenses</p>
-                                                    <h5 class="mb-0 text-danger">₹ 30,000</h5> <!-- Dummy value -->
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >₹ <?php echo number_format($remainingAmount); ?></h4>
+
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                                        <i class="fas fa-chart-line text-warning"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-0">Net Profit/Loss</p>
-                                            <h5 class="mb-0 text-success">₹ 50,000</h5>
-                                            <!-- Dummy value (Income - Expenses) -->
+                                    </div>
+
+                                    <!-- Second Card in First Column -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month <br>Donors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >₹ <?php echo number_format($remainingAmount); ?></h4>
+
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
+                                                            <i class="fas fa-users text-success"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end second column -->
-                        </div><!-- end row -->
+                                    </div>
 
+                                <!-- Second Column -->
+                                <div class="col-xl-6 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Highest Amount <br>Donor This Month</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >Mr. Satender Saini</h4>
 
-                        <!-- Add the following CSS for styling -->
-                        <style>
-                            .text-success {
-                                color: #28a745 !important;
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title  rounded fs-3">
+                                                        ₹  1
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div><!-- end row -->
+                    
+    <!-- d-->
+    <div class="row">
+    <!-- Top 5 Donors Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Top 5 Donors</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Donor Name</th>
+                                <th>Donation Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example donor data
+                            $topDonors = [
+                                ['name' => 'John Doe', 'amount' => '₹ 5000'],
+                                ['name' => 'Jane Smith', 'amount' => '₹ 4500'],
+                                ['name' => 'Alex Johnson', 'amount' => '₹ 4000'],
+                                ['name' => 'Emily Davis', 'amount' => '₹ 3500'],
+                                ['name' => 'Michael Brown', 'amount' => '₹ 3000']
+                            ];
+
+                            foreach ($topDonors as $index => $donor) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$donor['name']}</td>
+                                        <td>{$donor['amount']}</td>
+                                      </tr>";
                             }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
 
-                            .text-danger {
-                                color: #dc3545 !important;
+    <!-- Active Campaigns and Progress Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Campaign Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example campaign data
+                            $activeCampaigns = [
+                                ['name' => 'School Supplies Fund', 'progress' => 75],
+                                ['name' => 'Community Healthcare', 'progress' => 60],
+                                ['name' => 'Clean Water Project', 'progress' => 90],
+                                ['name' => 'Food Drive', 'progress' => 45],
+                                ['name' => 'Orphanage Support', 'progress' => 50],
+                                ['name' => 'Elderly Care', 'progress' => 65]
+                            ];
+
+                            foreach ($activeCampaigns as $index => $campaign) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$campaign['name']}</td>
+                                        <td>
+                                            <div class='progress'>
+                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
+                                                    {$campaign['progress']}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                      </tr>";
                             }
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- end table-responsive -->
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->
 
-                            .text-primary {
-                                color: #007bff !important;
+<div class="row mt-4">
+    <!-- Active Campaigns and Progress Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Campaign Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example campaign data
+                            $activeCampaigns = [
+                                ['name' => 'School Supplies Fund', 'progress' => 75],
+                                ['name' => 'Community Healthcare', 'progress' => 60],
+                                ['name' => 'Clean Water Project', 'progress' => 90],
+                                ['name' => 'Food Drive', 'progress' => 45],
+                                ['name' => 'Orphanage Support', 'progress' => 50],
+                                ['name' => 'Elderly Care', 'progress' => 65]
+                            ];
+
+                            foreach ($activeCampaigns as $index => $campaign) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$campaign['name']}</td>
+                                        <td>
+                                            <div class='progress'>
+                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
+                                                    {$campaign['progress']}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                      </tr>";
                             }
-
-                            .text-info {
-                                color: #17a2b8 !important;
-                            }
-
-                            .text-warning {
-                                color: #ffc107 !important;
-                            }
-                        </style>
-
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- end table-responsive -->
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->
 
 
+                            <!-- Add the following CSS for styling -->
+                            <style>
+                                .text-success {
+                                    color: #28a745 !important;
+                                }
+
+                                .text-danger {
+                                    color: #dc3545 !important;
+                                }
+
+                                .text-primary {
+                                    color: #007bff !important;
+                                }
+
+                                .text-info {
+                                    color: #17a2b8 !important;
+                                }
+
+                                .text-warning {
+                                    color: #ffc107 !important;
+                                }
+                            </style>
 
 
 
 
 
-                    </div><!-- container-fluid -->
-                </div><!-- End Page-content -->
-            </div><!-- end main content-->
-        </div><!-- END layout-wrapper -->
 
-        <?php include 'layouts/vendor-scripts.php'; ?>
-        <!-- apexcharts -->
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-        <!-- Vector map-->
-        <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
-        <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-        <!-- Dashboard init -->
-        <script src="assets/js/pages/dashboard-analytics.init.js"></script>
-        <!-- App js -->
-        <script src="assets/js/app.js"></script>
+
+
+                        </div><!-- container-fluid -->
+                    </div><!-- End Page-content -->
+                </div><!-- end main content-->
+            </div><!-- END layout-wrapper -->
+
+            <?php include 'layouts/vendor-scripts.php'; ?>
+            <!-- apexcharts -->
+            <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+            <!-- Vector map-->
+            <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
+            <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
+            <!-- Dashboard init -->
+            <script src="assets/js/pages/dashboard-analytics.init.js"></script>
+            <!-- App js -->
+            <script src="assets/js/app.js"></script>
 </body>
 
 </html>
