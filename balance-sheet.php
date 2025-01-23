@@ -1,5 +1,23 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
+<?php 
+include('config.php');
+$query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$res = mysqli_query($link, $query);
+$totalAmount = mysqli_fetch_assoc($res)['total'] ?: 0;
+
+$query1 = "SELECT SUM(amount) AS total FROM memberships WHERE DATE(start_date) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$res1 = mysqli_query($link, $query1);
+$totalAmount1 = mysqli_fetch_assoc($res1)['total'] ?: 0;
+
+$query2 = "SELECT SUM(cam_amount) AS total FROM campaigns WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$res2 = mysqli_query($link, $query2);
+$totalAmount2 = mysqli_fetch_assoc($res2)['total'] ?: 0;
+
+$yearTotal = $totalAmount + $totalAmount1 + $totalAmount2;
+// print_r($yearTotal);die();
+
+?>
 <head>
 <?php includeFileWithVariables('layouts/title-meta.php', array('title' => 'New Donation')); ?>
 <?php include 'layouts/head-css.php'; ?>   
@@ -26,6 +44,8 @@
                 <div class="d-flex flex-column">
                     <div class="row h-100">
                         <div class="card">
+                            
+                        
                         </div>
                     </div>
                 </div>
