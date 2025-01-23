@@ -200,11 +200,11 @@ if ($expenseResult->num_rows > 0) {
 $remainingBalance = $totalAmountincome - $totalExpenses;
 ?>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         $("#datePicker").datepicker({
             dateFormat: 'yy-mm-dd', // Format for MySQL
-            onSelect: function(selectedDate) {
+            onSelect: function (selectedDate) {
 
                 fetchTotalAmount(selectedDate);
             }
@@ -217,10 +217,10 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                 data: {
                     date: date
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#totalAmount").html(response);
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error("Error fetching total amount: " + error);
                 }
             });
@@ -247,169 +247,180 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
 </head>
 
 <body>
-
-
-
-    <!-- Begin page -->
-    <div id="layout-wrapper">
-        <?php include 'layouts/menu.php'; ?>
-        <div class="main-content">
-            <div class="page-content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xxl-5">
-                            <div class="d-flex flex-column ">
-                                <div class="row h-100">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body p-0">
-                                                <div class="row align-items-end">
-                                                    <div class="col-sm-8">
-                                                        <div class="p-4">
-                                                            <p class="fs-16 lh-base">Your free trial expired in <span class="fw-semibold">17 days.</span> <i class="mdi mdi-arrow-right"></i></p>
-                                                            <div class="mt-3"><a href="pages-pricing.php" class="btn btn-success">Upgrade Account!</a></div>
-                                                        </div>
+    <?php include 'layouts/menu.php'; ?>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-5">
+                        <div class="d-flex flex-column ">
+                            <div class="row h-100">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="row align-items-end">
+                                                <div class="col-sm-8">
+                                                    <div class="p-4">
+                                                        <p class="fs-16 lh-base">Your free trial expired in <span
+                                                                class="fw-semibold">17 days.</span> <i
+                                                                class="mdi mdi-arrow-right"></i></p>
+                                                        <div class="mt-3"><a href="pages-pricing.php"
+                                                                class="btn btn-success">Upgrade Account!</a></div>
                                                     </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="px-3">
-                                                            <img src="assets/images/user-illustarator-2.png" class="img-fluid" alt="">
-                                                        </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="px-3">
+                                                        <img src="assets/images/user-illustarator-2.png"
+                                                            class="img-fluid" alt="">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> <!-- end card-body-->
-                                    </div>
-                                </div> <!-- end col-->
-                            </div> <!-- end row-->
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div>
+                            </div> <!-- end col-->
+                        </div> <!-- end row-->
 
 
 
-                            <!-- Donation Cards Section -->
-                            <div class="row">
-                                <!-- Card 1 -->
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate donation-card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Today Donation <br>Collected</p>
-                                                </div>
+                        <!-- Donation Cards Section -->
+                        <div class="row">
+                            <!-- Card 1 -->
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-animate donation-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Today
+                                                    Donation <br>Collected</p>
                                             </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ <?php echo number_format($todayTotal); ?></h4>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                        <i class="fas fa-donate text-success"></i>
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <div class="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
+                                                    <?php echo number_format($todayTotal); ?></h4>
+                                            </div>
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-success-subtle rounded fs-3">
+                                                    <i class="fas fa-donate text-success"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
 
 
-                                <!-- Card 2 -->
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate donation-card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Week's <br>Donations</p>
-                                                </div>
+                            <!-- Card 2 -->
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-animate donation-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This
+                                                    Week's <br>Donations</p>
                                             </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ <?php echo number_format($weekTotal); ?></h4>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                                        <i class="fas fa-hand-holding-usd text-warning"></i>
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <div class="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
+                                                    <?php echo number_format($weekTotal); ?></h4>
+                                            </div>
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                                    <i class="fas fa-hand-holding-usd text-warning"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Card 3 -->
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate donation-card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month's <br>Donations</p>
-                                                </div>
+                            <!-- Card 3 -->
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-animate donation-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This
+                                                    Month's <br>Donations</p>
                                             </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ <?php echo number_format($monthTotal); ?></h4>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-info-subtle rounded fs-3">
-                                                        <i class="fas fa-coins text-info"></i>
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <div class="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
+                                                    <?php echo number_format($monthTotal); ?></h4>
+                                            </div>
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                    <i class="fas fa-coins text-info"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Card 4 -->
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate donation-card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Yearly <br>Donations</p>
-                                                </div>
+                            <!-- Card 4 -->
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-animate donation-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total
+                                                    Yearly <br>Donations</p>
                                             </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹ <?php echo number_format($yearTotal); ?></h4>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-danger-subtle rounded fs-3">
-                                                        <i class="fas fa-wallet text-danger"></i>
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <div class="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
+                                                    <?php echo number_format($yearTotal); ?></h4>
+                                            </div>
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-danger-subtle rounded fs-3">
+                                                    <i class="fas fa-wallet text-danger"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- end row -->
+                            </div>
+                        </div><!-- end row -->
 
 
 
 
-                            <div class="row">
+                        <div class="row">
                                 <!-- First Column with 2 Cards -->
 
                                 <!-- First Card in First Column -->
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card card-animate donation-card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Available <br>Balance</p>
-                                                </div>
+                                <div class="card card-animate donation-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total
+                                                    Available <br>Balance</p>
                                             </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4" style="margin-bottom: 13px;">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary ">₹ <?php echo number_format($remainingAmount); ?></h4>
+                                        </div>
+                                        <div class="d-flex align-items-end justify-content-between mt-4"
+                                            style="margin-bottom: 13px;">
+                                            <div>
+                                                <h4 class="fs-22 fw-semibold ff-secondary ">₹
+                                                    <?php echo number_format($remainingAmount); ?></h4>
 
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                        <i class="fas fa-donate text-success"></i>
-                                                    </span>
-                                                </div>
+                                            </div>
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-primary rounded fs-3">
+                                                <i class="fas fa-hand-holding-usd text-light"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
 
                                 <!-- Second Card in First Column -->
                                 <div class="col-xl-3 col-md-6">
@@ -444,6 +455,8 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                     </div>
                                 </div>
 
+                              
+
 
                                 <!-- Second Column -->
                                 <div class="col-xl-6">
@@ -472,11 +485,239 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-0">Net Profit/Loss</p>
                                                 <h5 class="mb-0 text-success">₹ <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
+                                               
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
                                 </div><!-- end second column -->
                             </div><!-- end row -->
+                                </div>
+                            </div>
+
+
+    
+                           
+
+                            <div class="row">
+                                <!-- First Column with 2 Cards -->
+                              
+                                    <!-- First Card in First Column -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Amount Raised <br>By Campaign</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >₹ <?php echo number_format($remainingAmount); ?></h4>
+
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                                        <i class="fas fa-chart-line text-warning"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Second Card in First Column -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month <br>Donors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >₹ <?php echo number_format($remainingAmount); ?></h4>
+
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
+                                                            <i class="fas fa-users text-success"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <!-- Second Column -->
+                                <div class="col-xl-6 col-md-6">
+                                        <div class="card card-animate donation-card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Highest Amount <br>Donor This Month</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary " >Mr. Satender Saini</h4>
+
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title  rounded fs-3">
+                                                        ₹  1
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div><!-- end row -->
+                    
+    <!-- d-->
+    <div class="row">
+    <!-- Top 5 Donors Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Top 5 Donors</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Donor Name</th>
+                                <th>Donation Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example donor data
+                            $topDonors = [
+                                ['name' => 'John Doe', 'amount' => '₹ 5000'],
+                                ['name' => 'Jane Smith', 'amount' => '₹ 4500'],
+                                ['name' => 'Alex Johnson', 'amount' => '₹ 4000'],
+                                ['name' => 'Emily Davis', 'amount' => '₹ 3500'],
+                                ['name' => 'Michael Brown', 'amount' => '₹ 3000']
+                            ];
+
+                            foreach ($topDonors as $index => $donor) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$donor['name']}</td>
+                                        <td>{$donor['amount']}</td>
+                                      </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <!-- Active Campaigns and Progress Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Campaign Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example campaign data
+                            $activeCampaigns = [
+                                ['name' => 'School Supplies Fund', 'progress' => 75],
+                                ['name' => 'Community Healthcare', 'progress' => 60],
+                                ['name' => 'Clean Water Project', 'progress' => 90],
+                                ['name' => 'Food Drive', 'progress' => 45],
+                                ['name' => 'Orphanage Support', 'progress' => 50],
+                                ['name' => 'Elderly Care', 'progress' => 65]
+                            ];
+
+                            foreach ($activeCampaigns as $index => $campaign) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$campaign['name']}</td>
+                                        <td>
+                                            <div class='progress'>
+                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
+                                                    {$campaign['progress']}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                      </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- end table-responsive -->
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->
+
+<div class="row mt-4">
+    <!-- Active Campaigns and Progress Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Campaign Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Example campaign data
+                            $activeCampaigns = [
+                                ['name' => 'School Supplies Fund', 'progress' => 75],
+                                ['name' => 'Community Healthcare', 'progress' => 60],
+                                ['name' => 'Clean Water Project', 'progress' => 90],
+                                ['name' => 'Food Drive', 'progress' => 45],
+                                ['name' => 'Orphanage Support', 'progress' => 50],
+                                ['name' => 'Elderly Care', 'progress' => 65]
+                            ];
+
+                            foreach ($activeCampaigns as $index => $campaign) {
+                                echo "<tr>
+                                        <td>" . ($index + 1) . "</td>
+                                        <td>{$campaign['name']}</td>
+                                        <td>
+                                            <div class='progress'>
+                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
+                                                    {$campaign['progress']}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                      </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- end table-responsive -->
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->
 
 
                             <!-- Add the following CSS for styling -->
