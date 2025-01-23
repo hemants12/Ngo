@@ -27,13 +27,13 @@
                         </div>
                         <div class="card-body">
                             <?php
-                            // Include database connection
+                            
                             include('Config.php');
                             
-                            // Current date
+                           
                             $currentDate = date('Y-m-d');
                             
-                            // Query to get records expiring within 10 days
+                            
                             $sql = "SELECT * FROM memberships 
                                     WHERE end_date BETWEEN '$currentDate' AND DATE_ADD('$currentDate', INTERVAL 30 DAY)";
                             $result = $link->query($sql);

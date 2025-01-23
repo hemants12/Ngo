@@ -293,12 +293,16 @@ $donorresult = $link->query($donor5);
         }
     </style>
 </head>
+
+
+
 <body>
     <?php include 'layouts/menu.php'; ?>
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                <div class="row h-100">
+                
+                            <div class="row h-100">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body p-0">
@@ -323,7 +327,12 @@ $donorresult = $link->query($donor5);
                                     </div> <!-- end card-body-->
                                 </div>
                             </div> <!-- end col-->
-                <div class="row">
+                        
+
+
+
+                        <!-- Donation Cards Section -->
+                        <div class="row">
                             <!-- Card 1 -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
@@ -337,8 +346,7 @@ $donorresult = $link->query($donor5);
                                         <div class="d-flex align-items-end justify-content-between mt-4">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
-                                                    <?php echo number_format($todayTotal); ?>
-                                                </h4>
+                                                    <?php echo number_format($todayTotal); ?></h4>
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -349,6 +357,9 @@ $donorresult = $link->query($donor5);
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <!-- Card 2 -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
@@ -362,8 +373,7 @@ $donorresult = $link->query($donor5);
                                         <div class="d-flex align-items-end justify-content-between mt-4">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
-                                                    <?php echo number_format($weekTotal); ?>
-                                                </h4>
+                                                    <?php echo number_format($weekTotal); ?></h4>
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -374,6 +384,7 @@ $donorresult = $link->query($donor5);
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Card 3 -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
@@ -387,8 +398,7 @@ $donorresult = $link->query($donor5);
                                         <div class="d-flex align-items-end justify-content-between mt-4">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
-                                                    <?php echo number_format($monthTotal); ?>
-                                                </h4>
+                                                    <?php echo number_format($monthTotal); ?></h4>
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-info-subtle rounded fs-3">
@@ -399,6 +409,7 @@ $donorresult = $link->query($donor5);
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Card 4 -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
@@ -412,8 +423,7 @@ $donorresult = $link->query($donor5);
                                         <div class="d-flex align-items-end justify-content-between mt-4">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
-                                                    <?php echo number_format($yearTotal); ?>
-                                                </h4>
+                                                    <?php echo number_format($yearTotaldonaction); ?></h4>
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-danger-subtle rounded fs-3">
@@ -425,7 +435,13 @@ $donorresult = $link->query($donor5);
                                 </div>
                             </div>
                         </div><!-- end row -->
-                <div class="row">
+
+
+
+
+                        <div class="row">
+                            <!-- First Column with 2 Cards -->
+
                             <!-- First Card in First Column -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
@@ -440,8 +456,8 @@ $donorresult = $link->query($donor5);
                                             style="margin-bottom: 13px;">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary ">₹
-                                                    <?php echo number_format($remainingAmount); ?>
-                                                </h4>
+                                                    <?php echo number_format($remainingAmount); ?></h4>
+
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-primary rounded fs-3">
@@ -452,14 +468,16 @@ $donorresult = $link->query($donor5);
                                     </div>
                                 </div>
                             </div>
+
+
                             <!-- Second Card in First Column -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card card-animate donation-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1 overflow-hidden">
-                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total
-                                                    Active <br>Member</p>
+                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Active <br>Member</p>
+
                                             </div>
                                         </div>
                                         <div class="align-items-end justify-content-between mt-1">
@@ -467,8 +485,7 @@ $donorresult = $link->query($donor5);
                                                 <div class="d-flex justify-content-between">
                                                     <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
                                                     <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $silverCount; ?>
-                                                    </h4>
+                                                        <?php echo $silverCount; ?></h4>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
@@ -478,14 +495,17 @@ $donorresult = $link->query($donor5);
                                                 <div class="d-flex justify-content-between">
                                                     <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
                                                     <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $platinumCount; ?>
-                                                    </h4>
+                                                        <?php echo $platinumCount; ?></h4>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+
+
                             <!-- Second Column -->
                             <div class="col-xl-6">
                                 <div class="card">
@@ -498,31 +518,34 @@ $donorresult = $link->query($donor5);
                                             <div class="col-6">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-0">Income</p>
-                                                    <h5 class="mb-0 text-primary">
-                                                        ₹<?php echo number_format($totalAmountincome); ?></h5>
-                                                    <!-- Dummy value -->
+                                                    <h5 class="mb-0 text-primary">₹<?php echo number_format($totalAmountincome); ?></h5> <!-- Dummy value -->
                                                 </div>
                                             </div>
                                             <!-- Expenses Section -->
                                             <div class="col-6">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-0">Expenses</p>
-                                                    <h5 class="mb-0 text-danger">₹
-                                                        <?php echo number_format($totalExpenses); ?></h5>
-                                                    <!-- Dummy value -->
+                                                    <h5 class="mb-0 text-danger">₹ <?php echo number_format($totalExpenses); ?></h5> <!-- Dummy value -->
                                                 </div>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-0">Net Profit/Loss</p>
-                                            <h5 class="mb-0 text-success">₹
-                                                <?php echo number_format($remainingBalance); ?></h5>
+                                            <h5 class="mb-0 text-success">₹ <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
+
                                         </div>
                                     </div><!-- end card body -->
                                 </div><!-- end card -->
                             </div><!-- end second column -->
                         </div><!-- end row -->
+                
+             
+
+
+
+
+
                 <div class="row">
                     <!-- First Column with 2 Cards -->
 
@@ -532,15 +555,12 @@ $donorresult = $link->query($donor5);
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Amount
-                                            Raised <br>By Campaign</p>
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Amount Raised <br>By Campaign</p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4"
-                                    style="margin-bottom: 13px;">
+                                <div class="d-flex align-items-end justify-content-between mt-4" style="margin-bottom: 13px;">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary ">₹
-                                            <?php echo number_format($remainingAmount); ?></h4>
+                                        <h4 class="fs-22 fw-semibold ff-secondary ">₹ <?php echo number_format($remainingAmount); ?></h4>
 
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
@@ -559,15 +579,26 @@ $donorresult = $link->query($donor5);
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month
-                                            <br>Donors</p>
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">This Month <br>Donors</p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4"
-                                    style="margin-bottom: 13px;">
+                                <div class="d-flex align-items-end justify-content-between mt-4" style="margin-bottom: 13px;">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary ">₹
-                                            <?php echo number_format($remainingAmount); ?></h4>
+                                        <?php
+                                        $sql = "SELECT COUNT(*) AS total_users FROM donations";
+                                        $result = $link->query($sql);
+
+                                        // Fetch and display the total users
+                                        if ($result && $row = $result->fetch_assoc()) {
+
+                                        ?>
+                                            <h4 class="fs-22 fw-semibold ff-secondary"> <?php echo $row['total_users']; ?></h4>
+                                        <?php
+                                        } else {
+                                            echo "Error: " . $conn->error;
+                                        }
+                                        ?>
+
 
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
@@ -586,12 +617,12 @@ $donorresult = $link->query($donor5);
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Highest Amount
-                                            <br>Donor This Month</p>
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Highest Amount <br>Donor This Month</p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4"
-                                    style="margin-bottom: 13px;">
+
+
+                                <div class="d-flex align-items-end justify-content-between mt-4" style="margin-bottom: 13px;">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary ">Mr. Satender Saini</h4>
 
@@ -606,6 +637,8 @@ $donorresult = $link->query($donor5);
                         </div>
                     </div>
                 </div><!-- end row -->
+
+                <!-- d-->
                 <div class="row">
                     <!-- Top 5 Donors Section -->
                     <div class="col-xl-6">
@@ -626,20 +659,14 @@ $donorresult = $link->query($donor5);
                                         <tbody>
                                             <?php
                                             // Example donor data
-                                            $topDonors = [
-                                                ['name' => 'John Doe', 'amount' => '₹ 5000'],
-                                                ['name' => 'Jane Smith', 'amount' => '₹ 4500'],
-                                                ['name' => 'Alex Johnson', 'amount' => '₹ 4000'],
-                                                ['name' => 'Emily Davis', 'amount' => '₹ 3500'],
-                                                ['name' => 'Michael Brown', 'amount' => '₹ 3000']
-                                            ];
 
-                                            foreach ($topDonors as $index => $donor) {
+                                            $rank = 1;
+                                            while ($row = $donorresult->fetch_assoc()) {
                                                 echo "<tr>
-                                        <td>" . ($index + 1) . "</td>
-                                        <td>{$donor['name']}</td>
-                                        <td>{$donor['amount']}</td>
-                                      </tr>";
+                                                    <td>" . $rank++ . "</td>
+                                                    <td>" . $row['fullName'] . "</td>
+                                                    <td>" . $row['totalDonation'] . "</td>
+                                                  </tr>";
                                             }
                                             ?>
                                         </tbody>
@@ -651,103 +678,139 @@ $donorresult = $link->query($donor5);
 
                     <!-- Active Campaigns and Progress Section -->
                     <div class="col-xl-6">
-                        <div class="card h-100">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
-                            </div><!-- end card header -->
-                            <div class="card-body">
-                                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Campaign Name</th>
-                                                <th>Progress</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            // Example campaign data
-                                            $activeCampaigns = [
-                                                ['name' => 'School Supplies Fund', 'progress' => 75],
-                                                ['name' => 'Community Healthcare', 'progress' => 60],
-                                                ['name' => 'Clean Water Project', 'progress' => 90],
-                                                ['name' => 'Food Drive', 'progress' => 45],
-                                                ['name' => 'Orphanage Support', 'progress' => 50],
-                                                ['name' => 'Elderly Care', 'progress' => 65]
-                                            ];
+    <div class="card h-100">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
+        </div><!-- end card header -->
+        <div class="card-body">
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Campaign Name</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Database query
+                        include('config.php');
+                        $sql = "SELECT name, cam_amount, target_goal FROM campaigns WHERE status = 'active'";
+                        $result = $link->query($sql);
 
-                                            foreach ($activeCampaigns as $index => $campaign) {
-                                                echo "<tr>
-                                        <td>" . ($index + 1) . "</td>
-                                        <td>{$campaign['name']}</td>
+                        if ($result->num_rows > 0) {
+                            $index = 1; // For serial numbers
+                            while ($row = $result->fetch_assoc()) {
+                                $campaignName = $row['name']; // Campaign name
+                                $camAmount = $row['cam_amount']; // Current campaign amount
+                                $targetGoal = $row['target_goal']; // Target goal
+
+                                // Calculate progress percentage
+                                $progress = ($targetGoal > 0) ? round(($camAmount / $targetGoal) * 100) : 0;
+
+                                // Table row with progress bar
+                                echo "<tr>
+                                        <td>$index</td>
+                                        <td>$campaignName</td>
                                         <td>
                                             <div class='progress'>
-                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
-                                                    {$campaign['progress']}%
+                                                <div class='progress-bar' role='progressbar' style='width: {$progress}%;' aria-valuenow='{$progress}' aria-valuemin='0' aria-valuemax='100'>
+                                                    {$progress}%
                                                 </div>
                                             </div>
                                         </td>
                                       </tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div><!-- end table-responsive -->
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
+                                $index++;
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No active campaigns found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div><!-- end table-responsive -->
+        </div><!-- end card body -->
+    </div><!-- end card -->
+</div><!-- end col -->
+
+                                        
+
                 </div><!-- end row -->
+
+              
+
+
                 <div class="row mt-4">
-                    <!-- Active Campaigns and Progress Section -->
-                    <div class="col-xl-6">
-                        <div class="card h-100">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Active Campaigns and Their Progress</h4>
-                            </div><!-- end card header -->
-                            <div class="card-body">
-                                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Campaign Name</th>
-                                                <th>Progress</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            // Example campaign data
-                                            $activeCampaigns = [
-                                                ['name' => 'School Supplies Fund', 'progress' => 75],
-                                                ['name' => 'Community Healthcare', 'progress' => 60],
-                                                ['name' => 'Clean Water Project', 'progress' => 90],
-                                                ['name' => 'Food Drive', 'progress' => 45],
-                                                ['name' => 'Orphanage Support', 'progress' => 50],
-                                                ['name' => 'Elderly Care', 'progress' => 65]
-                                            ];
+    <!-- Active Campaigns and Progress Section -->
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Renewal Reminders The  Progress</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Membership Type</th>
+                                <th>Days Remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include('Config.php');
 
-                                            foreach ($activeCampaigns as $index => $campaign) {
-                                                echo "<tr>
-                                        <td>" . ($index + 1) . "</td>
-                                        <td>{$campaign['name']}</td>
-                                        <td>
-                                            <div class='progress'>
-                                                <div class='progress-bar' role='progressbar' style='width: {$campaign['progress']}%;' aria-valuenow='{$campaign['progress']}' aria-valuemin='0' aria-valuemax='100'>
-                                                    {$campaign['progress']}%
-                                                </div>
-                                            </div>
-                                        </td>
-                                      </tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div><!-- end table-responsive -->
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
+                            // Current date
+                            $currentDate = date('Y-m-d');
+
+                            // Query to fetch memberships expiring within the next 30 days
+                            $sql = "SELECT name, membership_type, end_date, 
+                                    DATEDIFF(end_date, '$currentDate') AS days_remaining 
+                                    FROM memberships 
+                                    WHERE end_date >= '$currentDate' 
+                                    AND end_date <= DATE_ADD('$currentDate', INTERVAL 30 DAY)";
+                            $result = $link->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                $index = 1;
+                                while ($row = $result->fetch_assoc()) {
+                                    $name = $row['name'];
+                                    $membershipType = $row['membership_type'];
+                                    $daysRemaining = $row['days_remaining'];
+
+                                    // Display table row with days remaining
+                                    echo "<tr>
+                                            <td>$index</td>
+                                            <td>$name</td>
+                                            <td>$membershipType</td>
+                                            <td>
+                                                $daysRemaining days
+                                            </td>
+                                          </tr>";
+                                    $index++;
+                                }
+                            } else {
+                                echo "<tr><td colspan='4' class='text-center'>No memberships expiring within the next 30 days.</td></tr>";
+                            }
+
+                            // Close the database connection
+                            $link->close();
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- end table-responsive -->
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->
+
+
+
+
+                <!-- Add the following CSS for styling -->
                 <style>
                     .text-success {
                         color: #28a745 !important;
@@ -769,8 +832,11 @@ $donorresult = $link->query($donor5);
                         color: #ffc107 !important;
                     }
                 </style>
-            </div>
+
+
+            
         </div>
+    </div>
     </div>
     <?php include 'layouts/vendor-scripts.php'; ?>
     <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
@@ -779,4 +845,5 @@ $donorresult = $link->query($donor5);
     <script src="assets/js/pages/dashboard-analytics.init.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
+
 </html>
