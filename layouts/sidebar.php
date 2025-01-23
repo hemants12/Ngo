@@ -8,7 +8,8 @@
                 <img src="assets/images/logo-sm.png" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="assets/images/logo-light.png" alt="" height="17">
+                <!-- <img src="assets/images/logo-light.png" alt="" height="17"> -->
+                 <h2 class="mt-4 text-light">NGO KING</h2>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -107,7 +108,7 @@
 
 
 
-        <span data-key="t-employee">Employees</span>
+        <span data-key="t-employee">HRM</span>
     </a>
     <div class="collapse menu-dropdown" id="sidebaremployee">
         <ul class="nav nav-sm flex-column">
