@@ -455,6 +455,8 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                     </div>
                                 </div>
 
+                              
+
 
                                 <!-- Second Column -->
                                 <div class="col-xl-6">
@@ -483,6 +485,7 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-0">Net Profit/Loss</p>
                                                 <h5 class="mb-0 text-success">₹ <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
+                                               
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
@@ -741,26 +744,15 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                             </style>
 
 
-
-
-
-
-
-
-                        </div><!-- container-fluid -->
-                    </div><!-- End Page-content -->
-                </div><!-- end main content-->
-            </div><!-- END layout-wrapper -->
-
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php include 'layouts/vendor-scripts.php'; ?>
-            <!-- apexcharts -->
             <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-            <!-- Vector map-->
             <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
             <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-            <!-- Dashboard init -->
             <script src="assets/js/pages/dashboard-analytics.init.js"></script>
-            <!-- App js -->
             <script src="assets/js/app.js"></script>
 </body>
 
