@@ -130,7 +130,7 @@
         <i class="fas fa-desktop"></i>
 
 
-        <span data-key="t-customize">Customize</span>
+        <span data-key="t-customize">Website</span>
     </a>
     <div class="collapse menu-dropdown" id="sidebarCustomize">
         <ul class="nav nav-sm flex-column">

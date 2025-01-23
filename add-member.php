@@ -168,13 +168,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="Donation-amount" class="form-label">Donation Amount</label>
-                                                    <input type="number" class="form-control" id="Donation-amount" name="amount" value="<?php echo htmlspecialchars($amount); ?>" placeholder="Enter Your Donation Amount" required>
+                                                    <label for="Donation-amount" class="form-label"> Membership Fees</label>
+                                                    <input type="number" class="form-control" id="Donation-amount" name="amount" value="<?php echo htmlspecialchars($amount); ?>" placeholder="Enter Your Membership Fees" required>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="donationType" class="form-label">Donation Type</label>
+                                                    <label for="donationType" class="form-label">Payment Methods </label>
                                                     <select class="form-select" id="donationType" name="method" required>
-                                                        <option value="" disabled selected>Select Donation Type</option>
+                                                        <option value="" disabled selected>Select Payment Methods </option>
                                                         <option value="Online" <?php echo $method == "Online" ? "selected" : ""; ?>>Online</option>
                                                         <option value="Cash" <?php echo $method == "Cash" ? "selected" : ""; ?>>Cash</option>
                                                     </select>

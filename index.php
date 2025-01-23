@@ -386,64 +386,64 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
 
                             <div class="row">
                                 <!-- First Column with 2 Cards -->
-                              
-                                    <!-- First Card in First Column -->
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card card-animate donation-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Available  <br>Balance</p>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-end justify-content-between mt-4"style="margin-bottom: 13px;">
-                                                    <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary " >₹ <?php echo number_format($remainingAmount); ?></h4>
 
+                                <!-- First Card in First Column -->
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card card-animate donation-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Available <br>Balance</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-end justify-content-between mt-4" style="margin-bottom: 13px;">
+                                                <div>
+                                                    <h4 class="fs-22 fw-semibold ff-secondary ">₹ <?php echo number_format($remainingAmount); ?></h4>
+
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-success-subtle rounded fs-3">
+                                                        <i class="fas fa-donate text-success"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Second Card in First Column -->
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card card-animate donation-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Active <br>Member</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="align-items-end justify-content-between mt-1">
+                                                <div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">
+                                                            <?php echo $silverCount; ?></h4>
                                                     </div>
-                                                    <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                            <i class="fas fa-donate text-success"></i>
-                                                        </span>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
+                                                        <h4 class="fs-16 fw-semibold ff-secondary">
+                                                            <?php echo $platinumCount; ?></h4>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- Second Card in First Column -->
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card card-animate donation-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Active <br>Member</p>
-                                                     
-                                                    </div>
-                                                </div>
-                                                <div class="align-items-end justify-content-between mt-1">
-                                            <div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Silver</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $silverCount; ?></h4>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Gold</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary"><?php echo $goldCount; ?>
-                                                    </h4>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">Platinum</h4>
-                                                    <h4 class="fs-16 fw-semibold ff-secondary">
-                                                        <?php echo $platinumCount; ?></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                               
 
                                 <!-- Second Column -->
                                 <div class="col-xl-6">
@@ -471,7 +471,7 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                                             <hr>
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-0">Net Profit/Loss</p>
-                                                <h5 class="mb-0 text-success">₹  <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
+                                                <h5 class="mb-0 text-success">₹ <?php echo number_format($remainingBalance); ?></h5> <!-- Dummy value (Income - Expenses) -->
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
@@ -503,26 +503,15 @@ $remainingBalance = $totalAmountincome - $totalExpenses;
                             </style>
 
 
-
-
-
-
-
-
-                        </div><!-- container-fluid -->
-                    </div><!-- End Page-content -->
-                </div><!-- end main content-->
-            </div><!-- END layout-wrapper -->
-
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php include 'layouts/vendor-scripts.php'; ?>
-            <!-- apexcharts -->
             <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-            <!-- Vector map-->
             <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
             <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-            <!-- Dashboard init -->
             <script src="assets/js/pages/dashboard-analytics.init.js"></script>
-            <!-- App js -->
             <script src="assets/js/app.js"></script>
 </body>
 
