@@ -24,8 +24,8 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Donation Trends by Month 2025</h4>
-                                    <p class="text-muted">Monthly Donation Amount</p>
+                                    <h4 class="card-title">Campaign Trends by Month 2025</h4>
+                                    <p class="text-muted">Monthly Campaign Amount</p>
                                 </div>
                                 <div class="card-body">
                                     <div id="cam_amountChart"></div>

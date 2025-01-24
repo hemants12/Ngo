@@ -13,10 +13,27 @@ $todayTotal = $totalAmount;
 
 
 // Calculate Last 7 Days total
-$query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+// $query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+// $res = mysqli_query($link, $query);
+// $totalAmount = mysqli_fetch_assoc($res)['total'] ?: 0;
+// $weekTotal = $totalAmount;
+
+
+$query = "SELECT SUM(donationAmount) AS total 
+          FROM donations 
+          WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) 
+            AND DATE(created_at) <= CURDATE()";
 $res = mysqli_query($link, $query);
-$totalAmount = mysqli_fetch_assoc($res)['total'] ?: 0;
-$weekTotal = $totalAmount;
+
+if (!$res) {
+    die("Query Error: " . mysqli_error($link)); 
+}
+
+$weekTotal = mysqli_fetch_assoc($res)['total'] ?: 0;
+
+
+
+// print_r($weekTotal);die()
 
 
 // Calculate Last 1 Month total
@@ -35,27 +52,42 @@ $monthTotal = $totalAmount;
 
 
 // Calculate Last 1 Year total
-$query = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
-$res = mysqli_query($link, $query);
-$totalAmount = mysqli_fetch_assoc($res)['total'] ?: 0;
-$yearTotaldonaction = $totalAmount;
+
+
+// Updated Query
+// $query = "SELECT SUM(donationAmount) AS total FROM donations WHERE created_at BETWEEN '$start_date' AND '$end_date'";
+// $result = mysqli_query($link, $query);
+// $row = mysqli_fetch_assoc($result);
+// $total = $row['total'];
+// print_r($total); die();
+
+
 
 
 // Calculate Last 1 Year total  
 
-$query3 = "SELECT SUM(donationAmount) AS total FROM donations WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$start_date = date('Y-04-01', strtotime(date('Y') . '-04-01'));
+$end_date = date('Y-03-31', strtotime(date('Y') . '-04-01 +1 year'));
+
+if (date('m') < 4) {
+    // For months January, February, March
+    $start_date = date('Y-04-01', strtotime(date('Y') . '-04-01 -1 year'));
+    $end_date = date('Y-03-31', strtotime(date('Y') . '-03-31'));
+}
+$query3 = "SELECT SUM(donationAmount) AS total FROM donations WHERE created_at BETWEEN '$start_date' AND '$end_date'";
 $res3 = mysqli_query($link, $query3);
 $totalAmount3 = mysqli_fetch_assoc($res3)['total'] ?: 0;
-
-$query1 = "SELECT SUM(amount) AS total FROM memberships WHERE DATE(start_date) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+// $query = "SELECT SUM(donationAmount) AS total FROM donations WHERE created_at BETWEEN '$start_date' AND '$end_date'";
+$query1 = "SELECT SUM(amount) AS total FROM memberships WHERE DATE(start_date)BETWEEN '$start_date' AND '$end_date'";
 $res1 = mysqli_query($link, $query1);
 $totalAmount1 = mysqli_fetch_assoc($res1)['total'] ?: 0;
 
-$query2 = "SELECT SUM(cam_amount) AS total FROM campaigns WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$query2 = "SELECT SUM(cam_amount) AS total FROM campaigns WHERE DATE(created_at)BETWEEN '$start_date' AND '$end_date'";
 $res2 = mysqli_query($link, $query2);
 $totalAmount2 = mysqli_fetch_assoc($res2)['total'] ?: 0;
+// print_r($totalAmount2);die();
 
-$query4 = "SELECT SUM(otheramount) AS total FROM other WHERE DATE(other_date) >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+$query4 = "SELECT SUM(otheramount) AS total FROM other WHERE DATE(other_date)BETWEEN '$start_date' AND '$end_date'";
 $res4 = mysqli_query($link, $query4);
 $totalAmount4 = mysqli_fetch_assoc($res4)['total'] ?: 0;
 // print_r($totalAmount4); die();
@@ -63,13 +95,17 @@ $totalAmount4 = mysqli_fetch_assoc($res4)['total'] ?: 0;
 $yearTotal = $totalAmount1 + $totalAmount2 + $totalAmount3 + $totalAmount4;
 
 
+
 //   tbl_expense fetch 
-$query = "SELECT SUM(expense_amount) as total_expense FROM tbl_expense";
+// $query4 = "SELECT SUM(otheramount) AS total FROM other WHERE DATE(other_date)BETWEEN '$start_date' AND '$end_date'";
+
+$query = "SELECT SUM(expense_amount) as total_expense FROM tbl_expense WHERE DATE(date)BETWEEN '$start_date' AND '$end_date' ";
 $result = mysqli_query($link, $query);
 
 if ($result && $row = mysqli_fetch_assoc($result)) {
     $totalExpense = $row['total_expense'];
-
+    
+    
     // Calculate the remaining amount
     $remainingAmount = $yearTotal - $totalExpense;
 } else {
@@ -140,19 +176,21 @@ $totalother = $otherrow['total_other'] ? $otherrow['total_other'] : 0;
 $totalAmountincome = $totalDonations + $totalMemberships + $totalCampaigns + $totalother;
 
 
+// Query to fetch total expenses for the current month
+
 $currentMonth = date('m');
 $currentYear = date('Y');
-
-// Query to fetch total expenses for the current month
 $expenseQuery = "
-    SELECT SUM(expense_amount) AS total_expenses
-    FROM tbl_expense
-    WHERE MONTH(date) = $currentMonth AND YEAR(date) = $currentYear";
+    SELECT SUM(expense_amount) AS total_expenses 
+    FROM tbl_expense 
+    WHERE DATE(date) >= '$start_date' AND DATE(date) <= '$end_date'";
+
 $expenseResult = $link->query($expenseQuery);
 
 if ($expenseResult->num_rows > 0) {
     $expenseRow = $expenseResult->fetch_assoc();
     $totalExpenses = $expenseRow['total_expenses'] ? $expenseRow['total_expenses'] : 0;
+   
 } else {
     $totalExpenses = 0;
 }
@@ -331,7 +369,7 @@ if ($donorresult->num_rows > 0) {
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">₹
-                                            <?php echo number_format($yearTotaldonaction); ?></h4>
+                                            <?php echo number_format($totalAmount3); ?></h4>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-danger-subtle rounded fs-3">
@@ -543,7 +581,6 @@ if ($donorresult->num_rows > 0) {
           </div>";
                                     }
                                     ?>
-
                                 </div>
                             </div>
                         </div>
@@ -576,7 +613,7 @@ if ($donorresult->num_rows > 0) {
                                             while ($row = $donorresult->fetch_assoc()) {
                                                 echo "<tr>
                                                     <td>" . $rank++ . "</td>
-                                                    <td>" . ucfirst( $row['fullName']) . "</td>
+                                                    <td>" . ucfirst($row['fullName']) . "</td>
                                                     
                                                     <td>" . $row['totalDonation'] . "</td>
                                                   </tr>";

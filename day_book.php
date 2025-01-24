@@ -40,78 +40,72 @@
     $total = $totalAmount + $totalAmount1 + $totalAmount2 + $totalAmount3;
 
 
-
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Collect form data
         $expense_type = mysqli_real_escape_string($link, $_POST['expenseReason']);
+        $other_expense = isset($_POST['otherExpenseName']) ? trim(mysqli_real_escape_string($link, $_POST['otherExpenseName'])) : '';
         $expense_amount = mysqli_real_escape_string($link, $_POST['expenseAmount']);
         $date = date('Y-m-d');
     
-        // Calculate the total amount (already fetched in the main page)
-        $query_total = "SELECT 
-            (SELECT IFNULL(SUM(donationAmount), 0) FROM donations WHERE DATE(created_at) = CURDATE()) +
-            (SELECT IFNULL(SUM(amount), 0) FROM memberships WHERE DATE(start_date) = CURDATE()) +
-            (SELECT IFNULL(SUM(cam_amount), 0) FROM campaigns WHERE DATE(created_at) = CURDATE()) +
-            (SELECT IFNULL(SUM(otheramount), 0) FROM other WHERE DATE(other_date) = CURDATE()) 
-            AS total";
+        // Handle "Other expenses"
+        if ($expense_type === "Other expenses" && !empty($other_expense)) {
+            $expense_type = "Other: " . $other_expense; // Concatenate "Other" with the provided input
+        }
+    
+        // Calculate total amount collected today
+        $query_total = "
+            SELECT 
+                (SELECT IFNULL(SUM(donationAmount), 0) FROM donations WHERE DATE(created_at) = CURDATE()) +
+                (SELECT IFNULL(SUM(amount), 0) FROM memberships WHERE DATE(start_date) = CURDATE()) +
+                (SELECT IFNULL(SUM(cam_amount), 0) FROM campaigns WHERE DATE(created_at) = CURDATE()) +
+                (SELECT IFNULL(SUM(otheramount), 0) FROM other WHERE DATE(other_date) = CURDATE()) 
+                AS total";
         $result = mysqli_query($link, $query_total);
         $row = mysqli_fetch_assoc($result);
         $total_collected_today = $row['total'];
     
-        // Check if the total amount collected today is sufficient
-        if ($total_collected_today < $expense_amount) {
+        // Calculate total expenses for today
+        $query_expenses = "SELECT IFNULL(SUM(expense_amount), 0) AS total_expenses FROM tbl_expense WHERE DATE(date) = CURDATE()";
+        $result_expenses = mysqli_query($link, $query_expenses);
+        $row_expenses = mysqli_fetch_assoc($result_expenses);
+        $total_expenses_today = $row_expenses['total_expenses'];
+    
+        // Calculate remaining balance
+        $remaining_amount = $total_collected_today - $total_expenses_today;
+    
+        // Check if the expense can be covered by the remaining balance
+        if ($remaining_amount < $expense_amount) {
             $_SESSION['error'] = "Insufficient funds. Please add more funds to cover the expense amount.";
         } else {
-            // Check if an entry for today's date exists
-            $checkQuery = "SELECT expense_type, expense_amount FROM tbl_expense WHERE date = ?";
-            $checkStmt = $link->prepare($checkQuery);
-            $checkStmt->bind_param("s", $date);
-            $checkStmt->execute();
-            $checkResult = $checkStmt->get_result();
+            // Insert a new record
+            $insertQuery = $link->prepare("INSERT INTO tbl_expense (expense_type, total_amount, expense_amount, date) VALUES (?, ?, ?, ?)");
+            $insertQuery->bind_param("sdds", $expense_type, $total_collected_today, $expense_amount, $date);
     
-            if ($checkResult->num_rows > 0) {
-                // If entry exists, update the record
-                $existingData = $checkResult->fetch_assoc();
-                $existingExpenseType = $existingData['expense_type'];
-                $existingExpenseAmount = $existingData['expense_amount'];
+            if ($insertQuery->execute()) {
+                // Recalculate total expenses and remaining balance after insertion
+                $query_expenses = "SELECT IFNULL(SUM(expense_amount), 0) AS total_expenses FROM tbl_expense WHERE DATE(date) = CURDATE()";
+                $result_expenses = mysqli_query($link, $query_expenses);
+                $row_expenses = mysqli_fetch_assoc($result_expenses);
+                $total_expenses_today = $row_expenses['total_expenses'];
     
-                // Append new expense type to the existing one
-                $updatedExpenseType = $existingExpenseType . ', ' . $expense_type;
+                // Update remaining balance
+                $remaining_amount = $total_collected_today - $total_expenses_today;
     
-                // Update the record
-                $updateQuery = "UPDATE tbl_expense SET 
-                    expense_type = ?, 
-                    total_amount = ?, 
-                    expense_amount = expense_amount + ? 
-                    WHERE date = ?";
-                $updateStmt = $link->prepare($updateQuery);
-                $updateStmt->bind_param("sdds", $updatedExpenseType, $total_collected_today, $expense_amount, $date);
-    
-                if ($updateStmt->execute()) {
-                    $_SESSION['success'] = "Your expense has been successfully updated.";
-                } else {
-                    echo "Error: " . $updateStmt->error;
-                }
-                $updateStmt->close();
+                $_SESSION['success'] = "Your expense has been successfully submitted. Remaining balance updated.";
             } else {
-                // If no entry exists, insert a new record
-                $insertQuery = $link->prepare("INSERT INTO tbl_expense (expense_type, total_amount, expense_amount, date) VALUES (?, ?, ?, ?)");
-                $insertQuery->bind_param("sdds", $expense_type, $total_collected_today, $expense_amount, $date);
-                if ($insertQuery->execute()) {
-                    $_SESSION['success'] = "Your expense has been successfully submitted.";
-                } else {
-                    echo "Error: " . $insertQuery->error;
-                }
-                $insertQuery->close();
+                $_SESSION['error'] = "Error: " . $insertQuery->error;
             }
-    
-            // Clean up
-            $checkStmt->close();
+            $insertQuery->close();
         }
+    
         mysqli_close($link);
+    
+        // Redirect to avoid resubmission
+        header("Location: day_book.php");
+        exit;
     }
     
-
 
 
 
@@ -121,34 +115,17 @@
 
 
 
-
-
-
     include('config.php');
 
     // Fetch data from the database
 
-    $query = "SELECT `expense_id`, `expense_type`, `total_amount`, `expense_amount`, `date` 
-    FROM `tbl_expense` 
+    $query = "SELECT  * FROM `tbl_expense` 
     WHERE `date` = CURDATE()";
     $result = mysqli_query($link, $query);
 
-    $query = "SELECT expense_id, expense_type, total_amount, expense_amount, date 
-    FROM tbl_expense 
+    $query = "SELECT * FROM tbl_expense 
     WHERE date = CURDATE()";
-$result = mysqli_query($link, $query);
-
-if ($result && $result->num_rows > 0) {
-while ($row = mysqli_fetch_assoc($result)) {
-  $total_amount = $row['total_amount'];
-  $expense_amount = $row['expense_amount'];
-  $remaining_amount = $total_amount - $expense_amount;
-
-  
-}
-} else {
-echo '<p>No records found for today.</p>';
-}
+    $result = mysqli_query($link, $query);
 
     if ($result && $result->num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -159,6 +136,47 @@ echo '<p>No records found for today.</p>';
     } else {
         echo '<p>No records found for today.</p>';
     }
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $total_amount = $row['total_amount'];
+            $expense_amount = $row['expense_amount'];
+            $remaining_amount = $total_amount - $expense_amount;
+        }
+    } else {
+        echo '<p>No records found for today.</p>';
+    }
+
+
+
+    
+
+
+
+
+    // total amount today 
+
+    $totalexpence = "SELECT SUM(`expense_amount`) AS total_expense 
+    FROM `tbl_expense` 
+    WHERE DATE(`date`) = CURDATE();";
+$res = mysqli_query($link, $totalexpence);
+
+// Fetch the result
+if ($res) {
+    $row = mysqli_fetch_assoc($res);
+    $totalExpense = $row['total_expense'] ?: 0;
+   
+
+    // Print the total expense
+    
+} else {
+    // Print MySQL error for debugging
+    echo "Query Error: " . mysqli_error($link);
+}
+
+
+
+
 
 
 
@@ -173,6 +191,7 @@ echo '<p>No records found for today.</p>';
                     fetchTotalAmount(selectedDate);
                 }
             });
+
             function fetchTotalAmount(date) {
                 $.ajax({
                     url: "fetch_total_amount.php",
@@ -191,6 +210,7 @@ echo '<p>No records found for today.</p>';
         });
     </script>
 </head>
+
 <body>
     <div id="layout-wrapper">
         <?php include 'layouts/menu.php'; ?>
@@ -204,8 +224,9 @@ echo '<p>No records found for today.</p>';
                                     <h4>Total Amount Today:
                                         <strong id="totalAmount"><?php echo number_format($total); ?></strong>
                                     </h4>
-                                    <input type="text"  class="form-control"
-                                        style="width: 150px;">
+                                    <h4>Total Expanse Today:
+                                        <strong id="totalAmount">₹<?php echo number_format($totalExpense); ?> </strong>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="row">
@@ -343,21 +364,35 @@ echo '<p>No records found for today.</p>';
                                 </div>
                             <?php endif; ?>
                             <div class="card-body">
-                                <h5 class="card-title">Add Expense</h5>
-                                <!-- Expense Form -->
-                                <form action="" method="POST">
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="expenseReason" name="expenseReason" placeholder="Enter the reason" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <h5 class="card-title">Amount</h5>
-                                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="Enter the amount" required>
-                                    </div>
-                                    <div class="d-flex justify-content-start">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
+    <h5 class="card-title">Add Expense</h5>
+    <!-- Expense Form -->
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="expenseReason">Expense Reason</label>
+            <select class="form-control" id="expenseReason" name="expenseReason" required onchange="toggleOtherInput()">
+                <option value="">Select an expense</option>
+                <option value="office rent">Office Rent</option>
+                <option value="utilities">Utilities</option>
+                <option value="Advertisement Expenses">Advertisement Expenses</option>
+                <option value="Marketing Expenses">Marketing Expenses</option>
+                <option value="Other expenses">Other Expenses</option>
+            </select>
+        </div>
+        <div class="form-group" id="otherExpenseDiv" style="display: none;">
+            <label for="otherExpenseName">Please specify:</label>
+            <input type="text" class="form-control" id="otherExpenseName" name="otherExpenseName" placeholder="Enter other expense">
+        </div>
+        <div class="mb-3">
+            <h5 class="card-title">Amount</h5>
+            <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="Enter the amount" required>
+        </div>
+        <div class="d-flex justify-content-start">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+
                         </div>
 
 
@@ -386,7 +421,7 @@ echo '<p>No records found for today.</p>';
                                 <!-- Expense Form -->
                                 <form action="other_amount_insert.php" method="POST">
                                     <div class="mb-3">
-                                       
+
                                     </div>
                                     <div class="mb-3">
                                         <h5 class="card-title">Amount</h5>
@@ -400,7 +435,7 @@ echo '<p>No records found for today.</p>';
                         </div>
 
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -428,4 +463,39 @@ echo '<p>No records found for today.</p>';
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 
+    <script>
+    function toggleOtherInput() {
+        const expenseReason = document.getElementById('expenseReason').value;
+        const otherExpenseDiv = document.getElementById('otherExpenseDiv');
+        if (expenseReason === "Other expenses") {
+            otherExpenseDiv.style.display = "block";
+        } else {
+            otherExpenseDiv.style.display = "none";
+            document.getElementById('otherExpenseName').value = ''; // Clear other input
+        }
+    }
+</script>
 </body>
+
+<!-- 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $expenseReason = $_POST['expenseReason'];
+    $otherExpenseName = isset($_POST['otherExpenseName']) ? $_POST['otherExpenseName'] : null;
+
+    // Final expense reason to save in the database
+    $finalExpenseReason = ($expenseReason === 'Other expenses' && !empty($otherExpenseName)) 
+        ? $otherExpenseName 
+        : $expenseReason;
+
+    // Insert into database
+    $query = "INSERT INTO tbl_expense (expense_type, expense_amount, date) VALUES (?, ?, NOW())";
+    $stmt = $link->prepare($query);
+    $stmt->bind_param("ss", $finalExpenseReason, $expenseAmount); // Assuming $expenseAmount is available
+    if ($stmt->execute()) {
+        echo "Expense saved successfully!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+    $stmt->close();
+} -->
