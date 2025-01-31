@@ -107,18 +107,24 @@
 
 
 
-                        <span data-key="t-employee">Employees</span>
+                        <span data-key="t-employee">HRM</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebaremployee">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="Staff.php" class="nav-link" data-key="t-staffs">Staffs</a>
+                                <a href="Employee.php" class="nav-link" data-key="t-employee">Employee</a>
                             </li>
                             <li class="nav-item">
                                 <a href="attandance.php" class="nav-link" data-key="t-attandance">Attandance</a>
                             </li>
                             <li class="nav-item">
-                                <a href="user-roles.php" class="nav-link" data-key="t-user-roles">User Roles</a>
+                                <a href="Salary.php" class="nav-link" data-key="t-salary">Salary</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Holiday.php" class="nav-link" data-key="t-holiday">Holiday/Leave</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Employee.php" class="nav-link" data-key="t-employeeid">Employee Id</a>
                             </li>
                         </ul>
                     </div>

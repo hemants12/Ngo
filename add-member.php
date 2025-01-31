@@ -135,12 +135,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label for="membership_type" class="form-label">Select Membership Plan</label>
+                                                    <label for="membership_type" class="form-label">Select Nature of Membership</label>
                                                     <select class="form-select" id="membership_type" name="membership_type" required>
                                                         <option value="" disabled selected>Select a plan</option>
-                                                        <option value="Silver" <?php echo $membership_type == "Silver" ? "selected" : ""; ?>>Silver Plan</option>
-                                                        <option value="Gold" <?php echo $membership_type == "Gold" ? "selected" : ""; ?>>Gold Plan</option>
-                                                        <option value="Platinum" <?php echo $membership_type == "Platinum" ? "selected" : ""; ?>>Platinum Plan</option>
+                                                        <option value="Silver" <?php echo $membership_type == "Silver" ? "selected" : ""; ?>>Silver Member    / ₹ 2100  </option>
+                                                        <option value="Gold" <?php echo $membership_type == "Gold" ? "selected" : ""; ?>>Gold Member  / ₹ 5100 </option>
+                                                        <option value="Platinum" <?php echo $membership_type == "Platinum" ? "selected" : ""; ?>>Platinum Member  / ₹ 11000 </option>
+                                                        <option value="Life" <?php echo $membership_type == "Life" ? "selected" : ""; ?>>Life Member  / ₹ 21000 </option>
+                                                        <option value="Corporate" <?php echo $membership_type == "Corporate" ? "selected" : ""; ?>>Corporate Member / ₹ 51000 </option>
+                                                        <option value="Founder" <?php echo $membership_type == "Founder" ? "selected" : ""; ?>>Founder Member / ₹ 51000 </option>
                                                     </select>
                                                 </div>
                                             </div>

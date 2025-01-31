@@ -27,13 +27,8 @@
                         </div>
                         <div class="card-body">
                             <?php
-                            
                             include('Config.php');
-                            
-                           
                             $currentDate = date('Y-m-d');
-                            
-                            
                             $sql = "SELECT * FROM memberships 
                                     WHERE end_date BETWEEN '$currentDate' AND DATE_ADD('$currentDate', INTERVAL 30 DAY)";
                             $result = $link->query($sql);
@@ -60,9 +55,14 @@
                                             <td>" . $row['phonenumber'] . "</td>
                                             <td>" . $row['amount'] . "</td>
                                             <td>" . $row['end_date'] . "</td>
-                                            <td>  <button class='btn btn-primary send-btn' data-phonenumber='" . $row['phonenumber'] . "' data-name='" . $row['name'] . "' data-enddate='" . $row['end_date'] . "'>
-                            Send
-                        </button></td>
+                                            <td>
+                                                <button class='btn btn-primary send-btn' 
+                                                        data-phonenumber='" . $row['phonenumber'] . "' 
+                                                        data-name='" . $row['name'] . "' 
+                                                        data-enddate='" . $row['end_date'] . "'>
+                                                    Send
+                                                </button>
+                                            </td>
                                           </tr>";
                                 }
 
@@ -73,7 +73,6 @@
                                 echo "<p class='text-center'>No upcoming expirations within the next 30 days.</p>";
                             }
 
-                            // Close the database connection
                             $link->close();
                             ?>
                         </div>
@@ -96,25 +95,40 @@
             "responsive": true,
             "pageLength": 10,
             "lengthMenu": [5, 10, 25, 50, 100]
+        });
 
-            
+        // Handle SMS sending
+        $(document).on('click', '.send-btn', function() {
+            var phoneNumber = $(this).data('phonenumber');
+            var name = $(this).data('name');
+            var endDate = $(this).data('enddate');
+
+            if (confirm('Are you sure you want to send an SMS to ' + name + ' (' + phoneNumber + ')?')) {
+                $.ajax({
+                    url: 'send_sms.php',
+                    type: 'POST',
+                    data: {
+                        phonenumber: phoneNumber,
+                        name: name,
+                        enddate: endDate
+                    },
+                    success: function(response) {
+                        alert(response);
+                    },
+                    error: function() {
+                        alert('Failed to send SMS. Please try again.');
+                    }
+                });
+            }
         });
     });
-    
-
-    
 </script>
 
-
 <?php include 'layouts/vendor-scripts.php'; ?>
-    <!-- apexcharts -->
     <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-    <!-- Vector map-->
     <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
     <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-    <!-- Dashboard init -->
     <script src="assets/js/pages/dashboard-analytics.init.js"></script>
-    <!-- App js -->
     <script src="assets/js/app.js"></script>
 </body>
 
@@ -122,7 +136,30 @@
 
 
 
+<!-- <script>
+$(document).on('click', '.send-btn', function() {
+    var phoneNumber = $(this).data('phonenumber');
+    var name = $(this).data('name');
+    var endDate = $(this).data('enddate');
+    var message = "Dear " + name + ", your membership is set to expire on " + endDate + ". Please renew to avoid interruption.";
 
+    // AJAX call to send the message
+    $.ajax({
+        url: 'send_sms.php',  // PHP file to handle the SMS sending
+        type: 'POST',
+        data: {
+            phoneNumber: phoneNumber,
+            message: message
+        },
+        success: function(response) {
+            alert('Message sent successfully!');
+        },
+        error: function() {
+            alert('Failed to send the message. Please try again later.');
+        }
+    });
+});
+</script> -->
 <?php
 
 // $apiUrl = "https://api.whatsapp.com/send";

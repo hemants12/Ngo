@@ -9,7 +9,7 @@ if (!defined('DB_SERVER')) {
 $servername = 'localhost';  // You can keep this variable as needed
 $username   = 'root';
 $password   = '';
-$dbname     = 'Db_Login';
+$dbname     = 'db_Login';
 
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect($servername, $username, $password, $dbname);
